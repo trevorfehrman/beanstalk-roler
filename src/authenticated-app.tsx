@@ -1,11 +1,17 @@
 import * as React from 'react'
-import { useUser } from 'reactfire'
+import { useUser, useFirestore, useFirestoreCollectionData } from 'reactfire'
+import { User } from 'firebase/app'
+import { ICharacter } from 'components/character-sheet/character-sheet.interface'
 
 const AuthenticatedApp: React.FC = () => {
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  const user: any = useUser()
+  const user: User = useUser()
 
-  console.log(user)
+  const userCharactersCollectionRef = useFirestore()
+    .collection('characters')
+    .where('characterDetails.playerId', '==', user.uid)
+  const userCharacters: ICharacter[] = useFirestoreCollectionData(userCharactersCollectionRef)
+
+  console.log(userCharacters[0].attributes.agility)
 
   return <div>authenticated</div>
 }
