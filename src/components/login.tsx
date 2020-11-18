@@ -2,7 +2,7 @@ import * as React from 'react'
 import { useAuth } from 'reactfire'
 import { StyledFirebaseAuth } from 'react-firebaseui'
 
-const LoginForm: React.FC = () => {
+const Login: React.FC = () => {
   const auth = useAuth
 
   const uiConfig = {
@@ -17,4 +17,4 @@ const LoginForm: React.FC = () => {
   return <StyledFirebaseAuth uiConfig={uiConfig} firebaseAuth={auth()} />
 }
 
-export { LoginForm }
+export { Login }

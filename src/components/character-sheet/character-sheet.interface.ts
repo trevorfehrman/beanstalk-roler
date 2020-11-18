@@ -1,4 +1,5 @@
 interface ICharacter {
+  docId: string
   attributes: IAttributes
   characterDescription: ICharacterDescription
   characterDetails: ICharacterDetails
@@ -40,7 +41,7 @@ interface ICharacterDetails {
   archetype: string
   career: string
   name: string
-  playerId: string
+  playerId?: string
 }
 
 interface ICriticalInjury {
@@ -171,4 +172,4 @@ interface IWoundStrainAndDefense {
   }
 }
 
-export type { ICharacter }
+export type { ICharacter, ICharacterDetails }
