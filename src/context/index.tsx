@@ -1,5 +1,6 @@
 import React from 'react'
 import { FirebaseAppProvider, SuspenseWithPerf } from 'reactfire'
+import { BrowserRouter as Router } from 'react-router-dom'
 import { ChakraProvider } from '@chakra-ui/react'
 
 const firebaseConfig = {
@@ -17,7 +18,9 @@ const AppProviders: React.FC = ({ children }) => {
   return (
     <FirebaseAppProvider firebaseConfig={firebaseConfig}>
       <SuspenseWithPerf fallback={<div>Loading...</div>} traceId={'loading-app-status'}>
-        <ChakraProvider resetCSS>{children}</ChakraProvider>
+        <ChakraProvider resetCSS>
+          <Router>{children}</Router>
+        </ChakraProvider>
       </SuspenseWithPerf>
     </FirebaseAppProvider>
   )
