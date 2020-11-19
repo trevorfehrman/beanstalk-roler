@@ -11,7 +11,7 @@ interface ICharacter {
   skills: ISkills
   talentsAndSpecialAbilities: ITalent[]
   weapons: IWeapon[]
-  woundStraingAndDefense: IWoundStrainAndDefense
+  woundStrainAndDefense: IWoundStrainAndDefense
   xp: {
     availibleXp: number
     totalXp: number
