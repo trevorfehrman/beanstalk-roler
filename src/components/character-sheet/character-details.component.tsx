@@ -1,30 +1,18 @@
 import * as React from 'react'
-import { useFirestore } from 'reactfire'
 
-import { Input, Stack, Text, Button } from '@chakra-ui/react'
+import { Input, Stack, Text } from '@chakra-ui/react'
 
 import { ICharacterDetails } from './character-sheet.interface'
 
 type CharacterDetailsProps = {
   characterDetails: ICharacterDetails
   isEdit: boolean
-  handleUpdate: (values: any) => void
+  getFieldProps: (field: string) => void
 }
 
-const CharacterDetails: React.FC<CharacterDetailsProps> = ({ characterDetails, isEdit, handleUpdate }) => {
-  const [values, setValues] = React.useState<ICharacterDetails>({
-    name: characterDetails.name,
-    archetype: characterDetails.archetype,
-    career: characterDetails.career,
-  })
-
-  function handleChange(event: React.ChangeEvent<HTMLInputElement>) {
-    setValues({ ...values, [event.target.name]: event.target.value })
-  }
-
+const CharacterDetails: React.FC<CharacterDetailsProps> = ({ characterDetails, isEdit, getFieldProps }) => {
   return (
     <div>
-      <Button onClick={() => handleUpdate(values)}>Submit</Button>
       {!isEdit ? (
         <Stack spacing={3}>
           <Text size="lg">{characterDetails.name}</Text>
@@ -33,21 +21,9 @@ const CharacterDetails: React.FC<CharacterDetailsProps> = ({ characterDetails, i
         </Stack>
       ) : (
         <Stack spacing={3}>
-          <Input onChange={handleChange} name="name" variant="filled" defaultValue={characterDetails.name} size="md" />
-          <Input
-            onChange={handleChange}
-            name="archetype"
-            variant="filled"
-            defaultValue={characterDetails.archetype}
-            size="md"
-          />
-          <Input
-            onChange={handleChange}
-            name="career"
-            variant="filled"
-            defaultValue={characterDetails.career}
-            size="lg"
-          />
+          <Input {...getFieldProps?.('characterDetails.name')} variant="filled" size="md" />
+          <Input {...getFieldProps?.('characterDetails.archetype')} variant="filled" size="md" />
+          <Input {...getFieldProps?.('characterDetails.career')} variant="filled" size="md" />
         </Stack>
       )}
     </div>
