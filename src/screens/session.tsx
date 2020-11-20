@@ -17,7 +17,6 @@ const Session: React.FC = () => {
     .where('characterDetails.playerId', '==', user.uid)
 
   const userCharacters: ICharacter[] = useFirestoreCollectionData(userCharactersCollectionQuery, { idField: 'docId' })
-  console.log(userCharacters)
 
   return (
     <>

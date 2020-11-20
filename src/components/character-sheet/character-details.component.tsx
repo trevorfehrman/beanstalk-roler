@@ -1,6 +1,7 @@
 import * as React from 'react'
 
 import { Input, Stack, Text } from '@chakra-ui/react'
+import { EditableTextLarge } from 'styled-components/editable-text-lg'
 
 import { ICharacterDetails } from './character-sheet.interface'
 
@@ -15,15 +16,15 @@ const CharacterDetails: React.FC<CharacterDetailsProps> = ({ characterDetails, i
     <div>
       {!isEdit ? (
         <Stack spacing={3}>
-          <Text size="lg">{characterDetails.name}</Text>
-          <Text size="md">{characterDetails.archetype}</Text>
-          <Text size="md">{characterDetails.career}</Text>
+          <EditableTextLarge>{characterDetails.name}</EditableTextLarge>
+          <EditableTextLarge>{characterDetails.archetype}</EditableTextLarge>
+          <EditableTextLarge>{characterDetails.career}</EditableTextLarge>
         </Stack>
       ) : (
         <Stack spacing={3}>
-          <Input {...getFieldProps?.('characterDetails.name')} variant="filled" size="md" />
-          <Input {...getFieldProps?.('characterDetails.archetype')} variant="filled" size="md" />
-          <Input {...getFieldProps?.('characterDetails.career')} variant="filled" size="md" />
+          <Input {...getFieldProps?.('characterDetails.name')} variant="filled" size="lg" />
+          <Input {...getFieldProps?.('characterDetails.archetype')} variant="filled" size="lg" />
+          <Input {...getFieldProps?.('characterDetails.career')} variant="filled" size="lg" />
         </Stack>
       )}
     </div>

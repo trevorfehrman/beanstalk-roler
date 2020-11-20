@@ -172,4 +172,4 @@ interface IWoundStrainAndDefense {
   }
 }
 
-export type { ICharacter, ICharacterDetails, IAttributes }
+export type { ICharacter, ICharacterDetails, IAttributes, IWoundStrainAndDefense }
