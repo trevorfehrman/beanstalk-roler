@@ -1,9 +1,10 @@
 import * as React from 'react'
 
-import { Input, Stack, Text } from '@chakra-ui/react'
-import { EditableTextLarge } from 'styled-components/editable-text-lg'
+import { Stack } from '@chakra-ui/react'
 
-import { ICharacterDetails } from './character-sheet.interface'
+import { ICharacterDetails, CharLeaf } from './character-sheet.interface'
+
+import { TaggedTextInput } from 'components/common/tagged-text-input.component'
 
 type CharacterDetailsProps = {
   characterDetails: ICharacterDetails
@@ -13,21 +14,31 @@ type CharacterDetailsProps = {
 
 const CharacterDetails: React.FC<CharacterDetailsProps> = ({ characterDetails, isEdit, getFieldProps }) => {
   return (
-    <div>
-      {!isEdit ? (
-        <Stack spacing={3}>
-          <EditableTextLarge>{characterDetails.name}</EditableTextLarge>
-          <EditableTextLarge>{characterDetails.archetype}</EditableTextLarge>
-          <EditableTextLarge>{characterDetails.career}</EditableTextLarge>
-        </Stack>
-      ) : (
-        <Stack spacing={3}>
-          <Input {...getFieldProps?.('characterDetails.name')} variant="filled" size="lg" />
-          <Input {...getFieldProps?.('characterDetails.archetype')} variant="filled" size="lg" />
-          <Input {...getFieldProps?.('characterDetails.career')} variant="filled" size="lg" />
-        </Stack>
-      )}
-    </div>
+    <>
+      <Stack spacing={3}>
+        <TaggedTextInput
+          title="Character Name:"
+          value={characterDetails.name}
+          isEdit={isEdit}
+          getFieldProps={getFieldProps}
+          characterLeaf={CharLeaf.Name}
+        />
+        <TaggedTextInput
+          title="Archetype:"
+          value={characterDetails.archetype}
+          isEdit={isEdit}
+          getFieldProps={getFieldProps}
+          characterLeaf={CharLeaf.Archetype}
+        />
+        <TaggedTextInput
+          title="Career:"
+          value={characterDetails.career}
+          isEdit={isEdit}
+          getFieldProps={getFieldProps}
+          characterLeaf={CharLeaf.Career}
+        />
+      </Stack>
+    </>
   )
 }
 

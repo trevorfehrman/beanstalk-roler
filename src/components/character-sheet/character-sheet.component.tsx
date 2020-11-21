@@ -1,4 +1,5 @@
 import * as React from 'react'
+import styled from '@emotion/styled'
 
 import { Grid } from '@chakra-ui/react'
 
@@ -26,8 +27,16 @@ const templateAreas = `
   "talents talents talents talents"
 `
 
+const CharacterSheetGrid = styled(Grid)({
+  margin: '1rem',
+  gridGap: '.5rem',
+  padding: '1rem',
+  border: '1px solid lightgray',
+  borderRadius: '.375rem',
+})
+
 const CharacterSheet: React.FC = ({ children }) => {
-  return <Grid gridTemplateAreas={templateAreas}>{children}</Grid>
+  return <CharacterSheetGrid gridTemplateAreas={templateAreas}>{children}</CharacterSheetGrid>
 }
 
 export { CharacterSheet, TemplateArea }

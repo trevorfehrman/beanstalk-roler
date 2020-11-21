@@ -50,10 +50,10 @@ const CharacterSheetContainer: React.FC<CharacterSheetContainerProps> = ({ chara
                 />
               </GridItem>
               <GridItem gridRow={TemplateArea.Xp} gridColumn={TemplateArea.Xp}>
-                <Xp />
+                <Xp xp={formik.values.xp} />
               </GridItem>
               <GridItem gridRow={TemplateArea.Attributes} gridColumn={TemplateArea.Attributes}>
-                <Attributes />
+                <Attributes isEdit={edit} attributes={formik.values.attributes} />
               </GridItem>
             </CharacterSheet>
           </form>

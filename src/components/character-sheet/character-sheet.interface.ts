@@ -12,10 +12,12 @@ interface ICharacter {
   talentsAndSpecialAbilities: ITalent[]
   weapons: IWeapon[]
   woundStrainAndDefense: IWoundStrainAndDefense
-  xp: {
-    availibleXp: number
-    totalXp: number
-  }
+  xp: IXp
+}
+
+interface IXp {
+  availibleXp: number
+  totalXp: number
 }
 
 interface IAttributes {
@@ -130,15 +132,6 @@ interface ICustomSkill {
   associatedAttribute: Attributes
 }
 
-enum Attributes {
-  Agility = 'AGILITY',
-  Brawn = 'BRAWN',
-  Cunning = 'CUNNING',
-  Intellect = 'INTELLECT',
-  Presence = 'PRESENCE',
-  Willpower = 'WILLPOWER',
-}
-
 interface ITalent {
   abilitySummary: string
   active: boolean
@@ -172,4 +165,35 @@ interface IWoundStrainAndDefense {
   }
 }
 
-export type { ICharacter, ICharacterDetails, IAttributes, IWoundStrainAndDefense }
+export enum CharLeaf {
+  Archetype = 'characterDetails.archetype',
+  Career = 'characterDetails.career',
+  Name = 'characterDetails.name',
+  PlayerId = 'characterDetails.playerId',
+  DefenseMelee = 'woundStrainAndDefense.defense.melee',
+  DefenseRanged = 'woundStrainAndDefense.defense.ranged',
+  Soak = 'woundStrainAndDefense.soak',
+  StrainCurrent = 'woundStrainAndDefense.strainThreshold.current',
+  StrainTotal = 'woundStrainAndDefense.strainThreshold.total',
+  WoundCurrent = 'woundStrainAndDefense.woundThreshold.current',
+  WoundTotal = 'woundStrainAndDefense.woundThreshold.total',
+  XpAvailible = 'xp.availibleXp',
+  XpTotal = 'xp.totalXp',
+  Brawn = 'attributes.brawn',
+  Agility = 'attributes.agility',
+  Intellect = 'attributes.intellect',
+  Cunning = 'attributes.cunning',
+  Willpower = 'attributes.willpower',
+  Presence = 'attributes.presence',
+}
+
+export enum Attributes {
+  Brawn = 'Brawn',
+  Agility = 'Agility',
+  Intellect = 'Intellect',
+  Cunning = 'Cunning',
+  Willpower = 'Willpower',
+  Presence = 'Presence',
+}
+
+export type { ICharacter, ICharacterDetails, IAttributes, IWoundStrainAndDefense, IXp }

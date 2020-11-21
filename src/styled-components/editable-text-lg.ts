@@ -3,12 +3,14 @@ import { Text } from '@chakra-ui/react'
 
 const EditableTextLarge = styled(Text)({
   fontSize: '1.125rem',
-  padding: '0 1rem 0 1rem',
+  padding: '1px calc(1rem + 1px) 1px calc(1rem + 1px)',
   height: '3rem',
   display: 'flex',
   alignItems: 'center',
-  border: '2px solid grey',
+  border: '1px solid #E2E8F0',
   borderRadius: '.375rem',
+  borderTopRightRadius: 0,
+  borderTopLeftRadius: 0,
   width: '100%',
 })
 
