@@ -5,6 +5,7 @@ import { Grid } from '@chakra-ui/react'
 
 enum TemplateArea {
   Details = 'details',
+  Description = 'description',
   WoundStrain = 'woundStrain',
   Xp = 'xp',
   Attributes = 'attributes',
@@ -17,12 +18,12 @@ enum TemplateArea {
 }
 
 const templateAreas = `
-  "details woundStrain woundStrain xp"
+  "details description woundStrain xp"
   "attributes attributes attributes attributes"
   "skills skills skills favors"
   "weapons weapons weapons weapons"
-  "motivations motivations motivations description"
-  "equipment equipment equipment description"
+  "motivations motivations motivations motivations"
+  "equipment equipment equipment equipment"
   "notes notes notes injuries"
   "talents talents talents talents"
 `

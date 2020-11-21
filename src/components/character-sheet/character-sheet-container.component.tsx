@@ -8,6 +8,7 @@ import { ICharacter } from './character-sheet.interface'
 
 import { CharacterSheet, TemplateArea } from './character-sheet.component'
 import { CharacterDetails } from './character-details.component'
+import { CharacterDescription } from './character-description.component'
 import { WoundStrainAndDefense } from './wound-strain-and-defense.component'
 import { Xp } from './xp.component'
 import { Attributes } from './attributes.component'
@@ -22,7 +23,6 @@ const CharacterSheetContainer: React.FC<CharacterSheetContainerProps> = ({ chara
   const characterDocRef = useFirestore().collection('characters').doc(character.docId)
 
   function handleSubmit(values: ICharacter) {
-    // TODO: turn this back on ya ding dong
     characterDocRef.update(values)
     setEdit(false)
   }
@@ -40,6 +40,13 @@ const CharacterSheetContainer: React.FC<CharacterSheetContainerProps> = ({ chara
                   getFieldProps={formik.getFieldProps}
                   isEdit={edit}
                   characterDetails={formik.values.characterDetails}
+                />
+              </GridItem>
+              <GridItem gridRow={TemplateArea.Description} gridColumn={TemplateArea.Description}>
+                <CharacterDescription
+                  getFieldProps={formik.getFieldProps}
+                  isEdit={edit}
+                  characterDescription={formik.values.characterDescription}
                 />
               </GridItem>
               <GridItem gridRow={TemplateArea.WoundStrain} gridColumn={TemplateArea.WoundStrain}>

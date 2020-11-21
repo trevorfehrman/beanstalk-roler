@@ -185,6 +185,12 @@ export enum CharLeaf {
   Cunning = 'attributes.cunning',
   Willpower = 'attributes.willpower',
   Presence = 'attributes.presence',
+  Gender = 'characterDescription.gender',
+  Age = 'characterDescription.age',
+  Height = 'characterDescription.height',
+  Biuld = 'characterDescription.build',
+  Hair = 'characterDescription.hair',
+  Eyes = 'characterDescription.eyes',
 }
 
 export enum Attributes {
@@ -196,4 +202,4 @@ export enum Attributes {
   Presence = 'Presence',
 }
 
-export type { ICharacter, ICharacterDetails, IAttributes, IWoundStrainAndDefense, IXp }
+export type { ICharacter, ICharacterDetails, IAttributes, IWoundStrainAndDefense, IXp, ICharacterDescription }

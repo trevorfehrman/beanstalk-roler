@@ -32,7 +32,13 @@ const WoundStrainAndDefense: React.FC<WoundStrainAndDefenseProps> = ({
           {!isEdit ? (
             <EditableTextLarge>{woundAndStrainDefense.woundThreshold.total}</EditableTextLarge>
           ) : (
-            <Input {...getFieldProps?.(CharLeaf.WoundTotal)} variant="filled" size="lg" />
+            <Input
+              borderTopRightRadius={0}
+              borderTopLeftRadius={0}
+              {...getFieldProps?.(CharLeaf.WoundTotal)}
+              variant="filled"
+              size="lg"
+            />
           )}
         </Box>
       </div>
@@ -46,7 +52,13 @@ const WoundStrainAndDefense: React.FC<WoundStrainAndDefenseProps> = ({
           {!isEdit ? (
             <EditableTextLarge>{woundAndStrainDefense.strainThreshold.total}</EditableTextLarge>
           ) : (
-            <Input {...getFieldProps?.(CharLeaf.StrainTotal)} variant="filled" size="lg" />
+            <Input
+              borderTopRightRadius={0}
+              borderTopLeftRadius={0}
+              {...getFieldProps?.(CharLeaf.StrainTotal)}
+              variant="filled"
+              size="lg"
+            />
           )}
         </Box>
       </div>
