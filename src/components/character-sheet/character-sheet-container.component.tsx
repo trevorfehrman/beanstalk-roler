@@ -12,6 +12,7 @@ import { CharacterDescription } from './character-description.component'
 import { WoundStrainAndDefense } from './wound-strain-and-defense.component'
 import { Xp } from './xp.component'
 import { Attributes } from './attributes.component'
+import { Skills } from './skills.component'
 
 export const EditContext = React.createContext<boolean>(false)
 
@@ -51,6 +52,9 @@ const CharacterSheetContainer: React.FC<CharacterSheetContainerProps> = ({ chara
               </GridItem>
               <GridItem gridRow={TemplateArea.Attributes} gridColumn={TemplateArea.Attributes}>
                 <Attributes />
+              </GridItem>
+              <GridItem gridRow={TemplateArea.Skills} gridColumn={TemplateArea.Skills}>
+                <Skills />
               </GridItem>
             </CharacterSheet>
           </Form>

@@ -1,5 +1,5 @@
 import * as React from 'react'
-import { Field, FieldInputProps, FormikHelpers, useFormikContext } from 'formik'
+import { Field, useFormikContext } from 'formik'
 import debounceFn from 'debounce-fn'
 
 import {
@@ -13,16 +13,12 @@ import {
 import { getLeaf } from 'utils/get-leaf'
 
 import { ICharacter } from 'components/character-sheet/character-sheet.interface'
+import { FormikProps } from './formik-types'
 
 type FormikDecoratedNumberInputProps = {
   characterLeaf: string
   max?: string
   size?: 'sm' | 'md' | 'lg'
-}
-
-type FormikProps = {
-  form: FormikHelpers<keyof ICharacter>
-  field: FieldInputProps<keyof ICharacter>
 }
 
 const FormikDecoratedNumberInput: React.FC<FormikDecoratedNumberInputProps> = ({
@@ -40,7 +36,6 @@ const FormikDecoratedNumberInput: React.FC<FormikDecoratedNumberInputProps> = ({
       { wait: 500 },
     ),
   )
-  console.log(getLeaf(characterLeaf, formik.values))
   return (
     <Field name={characterLeaf}>
       {({ form, field }: FormikProps) => (

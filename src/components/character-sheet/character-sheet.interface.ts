@@ -101,7 +101,7 @@ interface IGeneralSkills {
   driving: number
   mechanics: number
   medicine: number
-  operation: number
+  operating: number
   perception: number
   piloting: number
   resilience: number
@@ -202,4 +202,14 @@ export enum Attributes {
   Presence = 'Presence',
 }
 
-export type { ICharacter, ICharacterDetails, IAttributes, IWoundStrainAndDefense, IXp, ICharacterDescription }
+export type {
+  ICharacter,
+  ICharacterDetails,
+  IAttributes,
+  IWoundStrainAndDefense,
+  IXp,
+  ICharacterDescription,
+  ISkills,
+  IKnowledgeSkills,
+  ISocialSkills,
+}
