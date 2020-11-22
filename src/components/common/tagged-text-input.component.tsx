@@ -1,63 +1,37 @@
 import * as React from 'react'
-import { useDebouncedCallback } from 'use-debounce'
+import { useFormikContext } from 'formik'
 
-import { Input } from '@chakra-ui/react'
+import { getLeaf } from 'utils/get-leaf'
 
 import { FormTag } from 'styled-components/form-tag'
 import { EditableTextLarge } from 'styled-components/editable-text-lg'
 
+import { DebouncedInput } from './debounced-input.component'
+
+import { EditContext } from 'components/character-sheet/character-sheet-container.component'
+import { ICharacter } from 'components/character-sheet/character-sheet.interface'
+
 type TaggedTextInputProps = {
   title: string
-  value: string
-  isEdit: boolean
   characterLeaf: string
-  getFieldProps: (field: string) => void
 }
 
-// eslint-disable-next-line @typescript-eslint/no-explicit-any
-const InputWrapper = (props: any) => {
-  const [innerValue, setInnerValue] = React.useState('')
+const TaggedTextInput: React.FC<TaggedTextInputProps> = ({ title, characterLeaf }) => {
+  const formik = useFormikContext<ICharacter>()
+  const edit = React.useContext(EditContext)
 
-  React.useEffect(() => {
-    if (props.value) {
-      setInnerValue(props.value as string)
-    } else {
-      setInnerValue('')
-    }
-  }, [props.value])
-
-  const debouncedHandleOnChange = useDebouncedCallback((event: React.ChangeEvent<HTMLInputElement>) => {
-    if (props.onChange) {
-      props.onChange(event)
-    }
-  }, 200)
-
-  const handleOnChange = React.useCallback(
-    (event: React.ChangeEvent<HTMLInputElement>) => {
-      event.persist()
-      const newValue = event.currentTarget.value
-      setInnerValue(newValue)
-      debouncedHandleOnChange.callback(event)
-    },
-    [debouncedHandleOnChange],
-  )
-
-  return <Input {...props} value={innerValue} onChange={handleOnChange} />
-}
-
-const TaggedTextInput: React.FC<TaggedTextInputProps> = ({ value, title, characterLeaf, isEdit, getFieldProps }) => {
   return (
     <>
-      {!isEdit ? (
+      {!edit ? (
         <div>
           <FormTag colorScheme="cyan">{title}</FormTag>
-          <EditableTextLarge>{value}</EditableTextLarge>
+          <EditableTextLarge>{getLeaf(characterLeaf, formik.values)}</EditableTextLarge>
         </div>
       ) : (
         <div>
           <FormTag colorScheme="cyan">{title}</FormTag>
-          <InputWrapper
-            {...getFieldProps?.(characterLeaf)}
+          <DebouncedInput
+            {...formik.getFieldProps?.(characterLeaf)}
             size="lg"
             borderTopLeftRadius={0}
             borderTopRightRadius={0}

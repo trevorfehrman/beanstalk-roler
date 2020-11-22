@@ -5,18 +5,17 @@ import { FormTag } from 'styled-components/form-tag'
 
 type TaggedNumberInputProps = {
   characterLeaf: string
-  value: number
   title: string
   size?: 'sm' | 'md' | 'lg'
 }
 
-const TaggedNumberInput: React.FC<TaggedNumberInputProps> = ({ characterLeaf, value, title, size = 'lg' }) => {
+const TaggedNumberInput: React.FC<TaggedNumberInputProps> = ({ characterLeaf, title, size = 'lg' }) => {
   return (
     <div>
       <FormTag colorScheme="cyan" size={size} width="100%" justifyContent="center">
         {title}
       </FormTag>
-      <FormikDecoratedNumberInput value={value} characterLeaf={characterLeaf} />
+      <FormikDecoratedNumberInput characterLeaf={characterLeaf} />
     </div>
   )
 }

@@ -10,12 +10,13 @@ import {
   NumberDecrementStepper,
 } from '@chakra-ui/react'
 
+import { getLeaf } from 'utils/get-leaf'
+
 import { ICharacter } from 'components/character-sheet/character-sheet.interface'
 
 type FormikDecoratedNumberInputProps = {
   characterLeaf: string
-  value: number
-  max?: number
+  max?: string
   size?: 'sm' | 'md' | 'lg'
 }
 
@@ -26,11 +27,10 @@ type FormikProps = {
 
 const FormikDecoratedNumberInput: React.FC<FormikDecoratedNumberInputProps> = ({
   characterLeaf,
-  value,
-  max,
+  max = '',
   size = 'lg',
 }) => {
-  const formik = useFormikContext()
+  const formik = useFormikContext<ICharacter>()
 
   const debounceSubmit = React.useRef(
     debounceFn(
@@ -40,13 +40,14 @@ const FormikDecoratedNumberInput: React.FC<FormikDecoratedNumberInputProps> = ({
       { wait: 500 },
     ),
   )
+  console.log(getLeaf(characterLeaf, formik.values))
   return (
     <Field name={characterLeaf}>
       {({ form, field }: FormikProps) => (
         <NumberInput
           min={0}
-          max={max && max}
-          value={value}
+          max={getLeaf(max, formik.values) as number}
+          value={getLeaf(characterLeaf, formik.values) as number}
           onChange={val => {
             form.setFieldValue(field.name, val)
             debounceSubmit.current()

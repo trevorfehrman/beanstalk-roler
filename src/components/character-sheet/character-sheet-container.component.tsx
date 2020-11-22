@@ -1,5 +1,5 @@
 import * as React from 'react'
-import { Formik } from 'formik'
+import { Formik, Form } from 'formik'
 import { useFirestore } from 'reactfire'
 
 import { Button, GridItem } from '@chakra-ui/react'
@@ -12,6 +12,8 @@ import { CharacterDescription } from './character-description.component'
 import { WoundStrainAndDefense } from './wound-strain-and-defense.component'
 import { Xp } from './xp.component'
 import { Attributes } from './attributes.component'
+
+export const EditContext = React.createContext<boolean>(false)
 
 type CharacterSheetContainerProps = {
   character: ICharacter
@@ -29,43 +31,31 @@ const CharacterSheetContainer: React.FC<CharacterSheetContainerProps> = ({ chara
 
   return (
     <>
-      {!edit ? <Button onClick={() => setEdit(isEdit => !isEdit)}>Edit Mode</Button> : null}
-      <Formik initialValues={character} onSubmit={handleSubmit}>
-        {formik => (
-          <form onSubmit={formik.handleSubmit}>
+      <EditContext.Provider value={edit}>
+        {!edit ? <Button onClick={() => setEdit(isEdit => !isEdit)}>Edit Mode</Button> : null}
+        <Formik initialValues={character} onSubmit={handleSubmit}>
+          <Form>
             {edit ? <Button type="submit">Submit</Button> : null}
             <CharacterSheet>
               <GridItem gridRow={TemplateArea.Details} gridColumn={TemplateArea.Details}>
-                <CharacterDetails
-                  getFieldProps={formik.getFieldProps}
-                  isEdit={edit}
-                  characterDetails={formik.values.characterDetails}
-                />
+                <CharacterDetails />
               </GridItem>
               <GridItem gridRow={TemplateArea.Description} gridColumn={TemplateArea.Description}>
-                <CharacterDescription
-                  getFieldProps={formik.getFieldProps}
-                  isEdit={edit}
-                  characterDescription={formik.values.characterDescription}
-                />
+                <CharacterDescription />
               </GridItem>
               <GridItem gridRow={TemplateArea.WoundStrain} gridColumn={TemplateArea.WoundStrain}>
-                <WoundStrainAndDefense
-                  getFieldProps={formik.getFieldProps}
-                  isEdit={edit}
-                  woundAndStrainDefense={formik.values.woundStrainAndDefense}
-                />
+                <WoundStrainAndDefense />
               </GridItem>
               <GridItem gridRow={TemplateArea.Xp} gridColumn={TemplateArea.Xp}>
-                <Xp xp={formik.values.xp} />
+                <Xp />
               </GridItem>
               <GridItem gridRow={TemplateArea.Attributes} gridColumn={TemplateArea.Attributes}>
-                <Attributes isEdit={edit} attributes={formik.values.attributes} />
+                <Attributes />
               </GridItem>
             </CharacterSheet>
-          </form>
-        )}
-      </Formik>
+          </Form>
+        </Formik>
+      </EditContext.Provider>
     </>
   )
 }

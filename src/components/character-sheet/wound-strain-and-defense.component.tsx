@@ -1,41 +1,35 @@
 import * as React from 'react'
+import { useFormikContext } from 'formik'
 
-import { Box, Input, Stack } from '@chakra-ui/react'
+import { Box, Stack } from '@chakra-ui/react'
 
-import { CharLeaf, IWoundStrainAndDefense } from './character-sheet.interface'
+import { getLeaf } from 'utils/get-leaf'
 
-import { FormikDecoratedNumberInput } from '../common/formik-decorated-number-input.component'
+import { CharLeaf, ICharacter } from './character-sheet.interface'
+
+import { FormikDecoratedNumberInput } from 'components/common/formik-decorated-number-input.component'
+import { DebouncedInput } from 'components/common/debounced-input.component'
+
 import { EditableTextLarge } from 'styled-components/editable-text-lg'
 import { FormTag } from 'styled-components/form-tag'
+import { EditContext } from './character-sheet-container.component'
 
-type WoundStrainAndDefenseProps = {
-  isEdit: boolean
-  woundAndStrainDefense: IWoundStrainAndDefense
-  getFieldProps: (field: string) => void
-}
-
-const WoundStrainAndDefense: React.FC<WoundStrainAndDefenseProps> = ({
-  isEdit,
-  woundAndStrainDefense,
-  getFieldProps,
-}) => {
+const WoundStrainAndDefense: React.FC = () => {
+  const formik = useFormikContext<ICharacter>()
+  const edit = React.useContext(EditContext)
   return (
     <Stack spacing={3}>
       <div>
         <FormTag colorScheme="cyan">Wounds:</FormTag>
         <Box d="flex">
-          <FormikDecoratedNumberInput
-            characterLeaf={CharLeaf.WoundCurrent}
-            value={woundAndStrainDefense.woundThreshold.current}
-            max={woundAndStrainDefense.woundThreshold.total}
-          />
-          {!isEdit ? (
-            <EditableTextLarge>{woundAndStrainDefense.woundThreshold.total}</EditableTextLarge>
+          <FormikDecoratedNumberInput characterLeaf={CharLeaf.WoundCurrent} max={CharLeaf.WoundTotal} />
+          {!edit ? (
+            <EditableTextLarge>{getLeaf(CharLeaf.WoundTotal, formik.values)}</EditableTextLarge>
           ) : (
-            <Input
+            <DebouncedInput
               borderTopRightRadius={0}
               borderTopLeftRadius={0}
-              {...getFieldProps?.(CharLeaf.WoundTotal)}
+              {...formik.getFieldProps?.(CharLeaf.WoundTotal)}
               variant="filled"
               size="lg"
             />
@@ -45,17 +39,14 @@ const WoundStrainAndDefense: React.FC<WoundStrainAndDefenseProps> = ({
       <div>
         <FormTag colorScheme="cyan">Strain:</FormTag>
         <Box d="flex">
-          <FormikDecoratedNumberInput
-            characterLeaf={CharLeaf.StrainCurrent}
-            value={woundAndStrainDefense.strainThreshold.current}
-          />
-          {!isEdit ? (
-            <EditableTextLarge>{woundAndStrainDefense.strainThreshold.total}</EditableTextLarge>
+          <FormikDecoratedNumberInput characterLeaf={CharLeaf.StrainCurrent} max={CharLeaf.StrainTotal} />
+          {!edit ? (
+            <EditableTextLarge>{getLeaf(CharLeaf.StrainTotal, formik.values)}</EditableTextLarge>
           ) : (
-            <Input
+            <DebouncedInput
               borderTopRightRadius={0}
               borderTopLeftRadius={0}
-              {...getFieldProps?.(CharLeaf.StrainTotal)}
+              {...formik.getFieldProps?.(CharLeaf.StrainTotal)}
               variant="filled"
               size="lg"
             />
