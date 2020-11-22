@@ -2,7 +2,7 @@ import * as React from 'react'
 import { Field, useFormikContext } from 'formik'
 
 import { FiPlus, FiMinus } from 'react-icons/fi'
-import { Button, Box, Tag, Text } from '@chakra-ui/react'
+import { Button, Box, Tag } from '@chakra-ui/react'
 
 import { FormikProps } from 'components/common/formik-types'
 import { ICharacter } from 'components/character-sheet/character-sheet.interface'
@@ -17,16 +17,31 @@ type SkillProps = {
 }
 
 const Skill: React.FC<SkillProps> = ({ skillValue, path, leafKey }) => {
-  const edit = React.useContext(EditContext)
+  const [dice, setDice] = React.useState({ greenDice: 0, yellowDice: 0 })
+
   const formik = useFormikContext<ICharacter>()
+  const edit = React.useContext(EditContext)
 
   const relatedAttributeValue = formik.getFieldProps(getRelatedAttribute(leafKey)).value
-  console.log(relatedAttributeValue, leafKey)
+
+  React.useEffect(() => {
+    function determineDice() {
+      const greenDice = Math.abs(skillValue - relatedAttributeValue)
+      const yellowDice = skillValue <= relatedAttributeValue ? skillValue : relatedAttributeValue
+      setDice({ greenDice, yellowDice })
+    }
+    determineDice()
+  }, [relatedAttributeValue, skillValue])
 
   return (
     <Box d="flex">
       <Tag colorScheme="cyan">{leafKey}</Tag>
-      <Text>{skillValue}</Text>
+      {Array.from({ length: dice.yellowDice }).map((_, i) => (
+        <span key={i}>yellow</span>
+      ))}
+      {Array.from({ length: dice.greenDice }).map((_, i) => (
+        <span key={i}>green</span>
+      ))}
       {edit ? (
         <Field name={path}>
           {({ form, field }: FormikProps) => (
