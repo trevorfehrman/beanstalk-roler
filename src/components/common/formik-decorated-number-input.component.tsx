@@ -12,8 +12,8 @@ import {
 
 import { getLeaf } from 'utils/get-leaf'
 
-import { ICharacter } from 'components/character-sheet/character-sheet.interface'
-import { FormikProps } from './formik-types'
+import { ICharacter } from 'interfaces-and-types/character-sheet.interface'
+import { FormikProps } from '../../interfaces-and-types/formik-props.type'
 
 type FormikDecoratedNumberInputProps = {
   characterLeaf: string

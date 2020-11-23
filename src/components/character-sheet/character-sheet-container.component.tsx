@@ -4,7 +4,7 @@ import { useFirestore } from 'reactfire'
 
 import { Button, GridItem } from '@chakra-ui/react'
 
-import { ICharacter } from './character-sheet.interface'
+import { ICharacter } from '../../interfaces-and-types/character-sheet.interface'
 
 import { CharacterSheet, TemplateArea } from './character-sheet.component'
 import { CharacterDetails } from './character-details.component'
@@ -13,6 +13,7 @@ import { WoundStrainAndDefense } from './wound-strain-and-defense.component'
 import { Xp } from './xp.component'
 import { Attributes } from './attributes.component'
 import { Skills } from './skills.component'
+import { SheetSection } from 'components/common/sheet-section.component'
 
 export const EditContext = React.createContext<boolean>(false)
 
@@ -38,24 +39,24 @@ const CharacterSheetContainer: React.FC<CharacterSheetContainerProps> = ({ chara
           <Form>
             {edit ? <Button type="submit">Submit</Button> : null}
             <CharacterSheet>
-              <GridItem gridRow={TemplateArea.Details} gridColumn={TemplateArea.Details}>
+              <SheetSection title="Details:" gridRow={TemplateArea.Details} gridColumn={TemplateArea.Details}>
                 <CharacterDetails />
-              </GridItem>
-              <GridItem gridRow={TemplateArea.Description} gridColumn={TemplateArea.Description}>
                 <CharacterDescription />
-              </GridItem>
-              <GridItem gridRow={TemplateArea.WoundStrain} gridColumn={TemplateArea.WoundStrain}>
+              </SheetSection>
+              <SheetSection
+                title="Thresholds and Xp:"
+                gridRow={TemplateArea.WoundStrain}
+                gridColumn={TemplateArea.WoundStrain}
+              >
                 <WoundStrainAndDefense />
-              </GridItem>
-              <GridItem gridRow={TemplateArea.Xp} gridColumn={TemplateArea.Xp}>
                 <Xp />
-              </GridItem>
-              <GridItem gridRow={TemplateArea.Attributes} gridColumn={TemplateArea.Attributes}>
+              </SheetSection>
+              <SheetSection title="Attributes:" gridRow={TemplateArea.Attributes} gridColumn={TemplateArea.Attributes}>
                 <Attributes />
-              </GridItem>
-              <GridItem gridRow={TemplateArea.Skills} gridColumn={TemplateArea.Skills}>
+              </SheetSection>
+              <SheetSection title="Skills:" gridRow={TemplateArea.Skills} gridColumn={TemplateArea.Skills}>
                 <Skills />
-              </GridItem>
+              </SheetSection>
             </CharacterSheet>
           </Form>
         </Formik>

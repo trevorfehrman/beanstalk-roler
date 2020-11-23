@@ -1,7 +1,7 @@
 import React from 'react'
 import { FirebaseAppProvider, SuspenseWithPerf } from 'reactfire'
 import { BrowserRouter as Router } from 'react-router-dom'
-import { ChakraProvider } from '@chakra-ui/react'
+import { ChakraProvider, extendTheme } from '@chakra-ui/react'
 
 const firebaseConfig = {
   apiKey: 'AIzaSyAJSOFA1YbigjxitdxoyJk4NlHdCMBe96Y',
@@ -14,11 +14,20 @@ const firebaseConfig = {
   measurementId: 'G-N9GQ6CRFS9',
 }
 
+const theme = extendTheme({
+  colors: {
+    brand: {
+      green: '#41e694',
+      yellow: '#fff178',
+    },
+  },
+})
+
 const AppProviders: React.FC = ({ children }) => {
   return (
     <FirebaseAppProvider firebaseConfig={firebaseConfig}>
       <SuspenseWithPerf fallback={<div>Loading...</div>} traceId={'loading-app-status'}>
-        <ChakraProvider resetCSS>
+        <ChakraProvider theme={theme} resetCSS>
           <Router>{children}</Router>
         </ChakraProvider>
       </SuspenseWithPerf>

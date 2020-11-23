@@ -5,7 +5,7 @@ import { Link } from 'react-router-dom'
 
 import { ButtonGroup, Button, Text } from '@chakra-ui/react'
 
-import { ISession } from 'interfaces/session.interface'
+import { ISession } from 'interfaces-and-types/session.interface'
 
 const SessionBrowser: React.FC = () => {
   const user: User = useUser()

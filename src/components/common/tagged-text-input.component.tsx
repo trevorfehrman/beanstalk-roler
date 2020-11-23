@@ -9,7 +9,7 @@ import { EditableTextLarge } from 'styled-components/editable-text-lg'
 import { DebouncedInput } from './debounced-input.component'
 
 import { EditContext } from 'components/character-sheet/character-sheet-container.component'
-import { ICharacter } from 'components/character-sheet/character-sheet.interface'
+import { ICharacter } from 'interfaces-and-types/character-sheet.interface'
 
 type TaggedTextInputProps = {
   title: string

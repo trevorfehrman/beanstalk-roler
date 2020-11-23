@@ -1,4 +1,4 @@
-import { ICharacter } from 'components/character-sheet/character-sheet.interface'
+import { ICharacter } from 'interfaces-and-types/character-sheet.interface'
 
 export function getLeaf(path: string, character: ICharacter): string | number | boolean {
   const pathArray = path.split('.')

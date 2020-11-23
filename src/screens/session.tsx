@@ -4,7 +4,7 @@ import { User } from 'firebase/app'
 
 import { Button, ButtonGroup, Text } from '@chakra-ui/react'
 
-import { ICharacter } from 'components/character-sheet/character-sheet.interface'
+import { ICharacter } from 'interfaces-and-types/character-sheet.interface'
 
 import { CharacterSheetContainer } from 'components/character-sheet/character-sheet-container.component'
 

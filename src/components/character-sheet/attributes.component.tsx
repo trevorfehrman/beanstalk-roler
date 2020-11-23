@@ -2,7 +2,7 @@ import * as React from 'react'
 
 import { HStack } from '@chakra-ui/react'
 
-import { CharLeaf, Attributes as Attr } from './character-sheet.interface'
+import { CharLeaf, Attributes as Attr } from '../../interfaces-and-types/character-sheet.interface'
 
 import { TaggedNumberInput } from '../common/tagged-number-input.component'
 

@@ -18,11 +18,11 @@ enum TemplateArea {
 }
 
 const templateAreas = `
-  "details description woundStrain xp"
+  "details details woundStrain woundStrain"
   "attributes attributes attributes attributes"
-  "skills skills skills favors"
+  "skills skills skills skill"
   "weapons weapons weapons weapons"
-  "motivations motivations motivations motivations"
+  "motivations motivations favors favors"
   "equipment equipment equipment equipment"
   "notes notes notes injuries"
   "talents talents talents talents"

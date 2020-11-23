@@ -212,4 +212,6 @@ export type {
   ISkills,
   IKnowledgeSkills,
   ISocialSkills,
+  IGeneralSkills,
+  ICombatSkills,
 }

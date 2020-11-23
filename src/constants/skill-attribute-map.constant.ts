@@ -1,7 +1,5 @@
-/* eslint-disable prettier/prettier */
-import { CharLeaf } from 'components/character-sheet/character-sheet.interface'
-
-const skillAttributeMap: { [leaf: string]: string } = {
+import { CharLeaf } from 'interfaces-and-types/character-sheet.interface'
+export const skillAttributeMap: { [leaf: string]: string } = {
   brawl: CharLeaf.Brawn,
   gunnery: CharLeaf.Agility,
   melee: CharLeaf.Brawn,
@@ -33,8 +31,4 @@ const skillAttributeMap: { [leaf: string]: string } = {
   science: CharLeaf.Intellect,
   society: CharLeaf.Intellect,
   theNet: CharLeaf.Intellect,
-}
-
-export function getRelatedAttribute(path: string): string {
-  return skillAttributeMap[path]
 }

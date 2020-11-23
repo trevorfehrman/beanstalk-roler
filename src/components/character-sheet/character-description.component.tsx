@@ -2,7 +2,7 @@ import * as React from 'react'
 
 import { Stack, Box } from '@chakra-ui/react'
 
-import { CharLeaf } from './character-sheet.interface'
+import { CharLeaf } from '../../interfaces-and-types/character-sheet.interface'
 
 import { TaggedTextInput } from 'components/common/tagged-text-input.component'
 

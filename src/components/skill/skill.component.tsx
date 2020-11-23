@@ -2,13 +2,19 @@ import * as React from 'react'
 import { Field, useFormikContext } from 'formik'
 
 import { FiPlus, FiMinus } from 'react-icons/fi'
-import { Button, Box, Tag } from '@chakra-ui/react'
+import { Flex, useTheme } from '@chakra-ui/react'
 
-import { FormikProps } from 'components/common/formik-types'
-import { ICharacter } from 'components/character-sheet/character-sheet.interface'
-import { getRelatedAttribute } from 'utils/related-attribute'
+import { FormikProps } from 'interfaces-and-types/formik-props.type'
+import { ICharacter } from 'interfaces-and-types/character-sheet.interface'
 
+import { getRelatedAttribute } from 'utils/get-related-attribute'
 import { EditContext } from 'components/character-sheet/character-sheet-container.component'
+import { useDice } from 'hooks/use-dice.hook'
+
+import { SkillBox } from 'styled-components/skill-box'
+import { SkillTag } from 'styled-components/skill-tag'
+import { SkillButton } from 'styled-components/skill-button'
+import { skillNameMap } from 'constants/skill-name-map.constant'
 
 type SkillProps = {
   leafKey: string
@@ -17,46 +23,47 @@ type SkillProps = {
 }
 
 const Skill: React.FC<SkillProps> = ({ skillValue, path, leafKey }) => {
-  const [dice, setDice] = React.useState({ greenDice: 0, yellowDice: 0 })
-
   const formik = useFormikContext<ICharacter>()
   const edit = React.useContext(EditContext)
-
+  const theme = useTheme()
   const relatedAttributeValue = formik.getFieldProps(getRelatedAttribute(leafKey)).value
-
-  React.useEffect(() => {
-    function determineDice() {
-      const greenDice = Math.abs(skillValue - relatedAttributeValue)
-      const yellowDice = skillValue <= relatedAttributeValue ? skillValue : relatedAttributeValue
-      setDice({ greenDice, yellowDice })
-    }
-    determineDice()
-  }, [relatedAttributeValue, skillValue])
+  const [dice] = useDice(relatedAttributeValue, skillValue)
 
   return (
-    <Box d="flex">
-      <Tag colorScheme="cyan">{leafKey}</Tag>
-      {Array.from({ length: dice.yellowDice }).map((_, i) => (
-        <span key={i}>yellow</span>
-      ))}
-      {Array.from({ length: dice.greenDice }).map((_, i) => (
-        <span key={i}>green</span>
-      ))}
+    <Flex align="flex-start" margin=".5rem" direction="column">
+      <Flex>
+        <SkillTag colorScheme="cyan">{skillNameMap[leafKey]}</SkillTag>
+        {Array.from({ length: dice.yellowDice }).map((_, i) => (
+          <SkillBox color={theme.colors.brand.yellow} key={i} />
+        ))}
+        {Array.from({ length: dice.greenDice }).map((_, i) => (
+          <SkillBox color={theme.colors.brand.green} key={i} />
+        ))}
+        {Array.from({ length: 5 - (dice.yellowDice + dice.greenDice) }).map((_, i) => (
+          <SkillBox color="white" key={i} />
+        ))}
+      </Flex>
       {edit ? (
         <Field name={path}>
           {({ form, field }: FormikProps) => (
-            <>
-              <Button onClick={() => form.setFieldValue(field.name, Number(field.value) - 1)}>
+            <Flex>
+              <SkillButton
+                isDisabled={dice.yellowDice === 0}
+                onClick={() => form.setFieldValue(field.name, Number(field.value) - 1)}
+              >
                 <FiMinus />
-              </Button>
-              <Button onClick={() => form.setFieldValue(field.name, Number(field.value) + 1)}>
+              </SkillButton>
+              <SkillButton
+                isDisabled={dice.yellowDice + dice.greenDice === 5}
+                onClick={() => form.setFieldValue(field.name, Number(field.value) + 1)}
+              >
                 <FiPlus />
-              </Button>
-            </>
+              </SkillButton>
+            </Flex>
           )}
         </Field>
       ) : null}
-    </Box>
+    </Flex>
   )
 }
 

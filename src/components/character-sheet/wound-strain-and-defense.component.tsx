@@ -5,7 +5,7 @@ import { Box, Stack } from '@chakra-ui/react'
 
 import { getLeaf } from 'utils/get-leaf'
 
-import { CharLeaf, ICharacter } from './character-sheet.interface'
+import { CharLeaf, ICharacter } from '../../interfaces-and-types/character-sheet.interface'
 
 import { FormikDecoratedNumberInput } from 'components/common/formik-decorated-number-input.component'
 import { DebouncedInput } from 'components/common/debounced-input.component'
