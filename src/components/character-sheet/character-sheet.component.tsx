@@ -16,16 +16,15 @@ enum TemplateArea {
   Notes = 'notest',
   Talents = 'talents',
 }
-
-const templateAreas = `
-  "details details woundStrain woundStrain"
-  "attributes attributes attributes attributes"
-  "skills skills skills skill"
-  "weapons weapons weapons weapons"
-  "motivations motivations favors favors"
-  "equipment equipment equipment equipment"
-  "notes notes notes injuries"
-  "talents talents talents talents"
+const templateAreas2 = `
+  "details woundStrain"
+  "attributes attributes"
+  "skills skills"
+  "weapons weapons"
+  "motivations favors"
+  "equipment equipment"
+  "notes injuries"
+  "talents talents"
 `
 
 const CharacterSheetGrid = styled(Grid)({
@@ -37,7 +36,7 @@ const CharacterSheetGrid = styled(Grid)({
 })
 
 const CharacterSheet: React.FC = ({ children }) => {
-  return <CharacterSheetGrid gridTemplateAreas={templateAreas}>{children}</CharacterSheetGrid>
+  return <CharacterSheetGrid gridTemplateAreas={templateAreas2}>{children}</CharacterSheetGrid>
 }
 
 export { CharacterSheet, TemplateArea }

@@ -2,7 +2,9 @@ import * as React from 'react'
 import { Formik, Form } from 'formik'
 import { useFirestore } from 'reactfire'
 
-import { Button, GridItem } from '@chakra-ui/react'
+import styled from '@emotion/styled'
+
+import { Button } from '@chakra-ui/react'
 
 import { ICharacter } from '../../interfaces-and-types/character-sheet.interface'
 
@@ -16,6 +18,10 @@ import { Skills } from './skills.component'
 import { SheetSection } from 'components/common/sheet-section.component'
 
 export const EditContext = React.createContext<boolean>(false)
+
+const StyledForm = styled(Form)({
+  width: '66%',
+})
 
 type CharacterSheetContainerProps = {
   character: ICharacter
@@ -34,10 +40,10 @@ const CharacterSheetContainer: React.FC<CharacterSheetContainerProps> = ({ chara
   return (
     <>
       <EditContext.Provider value={edit}>
-        {!edit ? <Button onClick={() => setEdit(isEdit => !isEdit)}>Edit Mode</Button> : null}
         <Formik initialValues={character} onSubmit={handleSubmit}>
-          <Form>
+          <StyledForm>
             {edit ? <Button type="submit">Submit</Button> : null}
+            {!edit ? <Button onClick={() => setEdit(isEdit => !isEdit)}>Edit Mode</Button> : null}
             <CharacterSheet>
               <SheetSection title="Details:" gridRow={TemplateArea.Details} gridColumn={TemplateArea.Details}>
                 <CharacterDetails />
@@ -58,7 +64,7 @@ const CharacterSheetContainer: React.FC<CharacterSheetContainerProps> = ({ chara
                 <Skills />
               </SheetSection>
             </CharacterSheet>
-          </Form>
+          </StyledForm>
         </Formik>
       </EditContext.Provider>
     </>

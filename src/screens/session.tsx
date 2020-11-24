@@ -2,11 +2,15 @@ import * as React from 'react'
 import { useUser, useFirestore, useFirestoreCollectionData } from 'reactfire'
 import { User } from 'firebase/app'
 
-import { Button, ButtonGroup, Text } from '@chakra-ui/react'
+import { Button, ButtonGroup, Text, Flex } from '@chakra-ui/react'
 
 import { ICharacter } from 'interfaces-and-types/character-sheet.interface'
+import { Dice } from 'interfaces-and-types/dice-type'
 
 import { CharacterSheetContainer } from 'components/character-sheet/character-sheet-container.component'
+import { RollFeed } from 'components/roll-feed/roll-feed.component'
+
+export const DiceContext = React.createContext<[Dice, (dice: Dice) => void] | null>(null)
 
 const Session: React.FC = () => {
   const [character, setCharacter] = React.useState<ICharacter>()
@@ -17,12 +21,17 @@ const Session: React.FC = () => {
     .where('characterDetails.playerId', '==', user.uid)
 
   const userCharacters: ICharacter[] = useFirestoreCollectionData(userCharactersCollectionQuery, { idField: 'docId' })
-
+  const [dice, setDice] = React.useState({ greenDice: 0, yellowDice: 0 })
   return (
     <>
       {character ? (
         <>
-          <CharacterSheetContainer character={character} />
+          <DiceContext.Provider value={[dice, setDice]}>
+            <Flex>
+              <CharacterSheetContainer character={character} />
+              <RollFeed />
+            </Flex>
+          </DiceContext.Provider>
         </>
       ) : (
         <>

@@ -1,8 +1,6 @@
 import * as React from 'react'
-type Dice = {
-  greenDice: number
-  yellowDice: number
-}
+import { Dice } from 'interfaces-and-types/dice-type'
+
 export function useDice(
   relatedAttributeValue: number,
   skillValue: number,
