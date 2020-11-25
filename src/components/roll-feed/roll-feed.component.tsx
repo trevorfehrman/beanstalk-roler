@@ -21,14 +21,13 @@ const RollFeed: React.FC = () => {
 
   const sessionsRollsRef = useFirestore().collection('sessions').doc(sessionId).collection('sessions-rolls')
   const rolls = useFirestoreCollectionData(sessionsRollsRef)
-  console.log('hi ')
 
   return (
     <RollFeedContainer>
       {rolls.map((roll, i) => (
         <div key={i}>{JSON.stringify(roll)}</div>
       ))}
-      <DicePanel />
+      <DicePanel rollsRef={sessionsRollsRef} />
     </RollFeedContainer>
   )
 }

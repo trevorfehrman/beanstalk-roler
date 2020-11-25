@@ -1,10 +1,12 @@
 import * as React from 'react'
-import { Formik, Form, FieldInputProps, FormikHelpers, useFormik } from 'formik'
+import { FieldInputProps, FormikHelpers, useFormik } from 'formik'
+import { firestore } from 'firebase'
 
 import { Button, HStack } from '@chakra-ui/react'
 
-import { IDicePanel, IRoll } from 'interfaces-and-types/roll.interface'
+import { IRoll } from 'interfaces-and-types/roll.interface'
 import { initialDiceValues } from 'constants/dice-panel-initial-values.constant'
+import { roll } from 'constants/roll.constant'
 
 import { Die } from './die.component'
 import { DiceContext } from 'screens/session'
@@ -14,16 +16,26 @@ export type FormikProps = {
   field: FieldInputProps<keyof IRoll>
 }
 
-const DicePanel: React.FC = () => {
+const DicePanel: React.FC<{ rollsRef: firestore.CollectionReference }> = ({ rollsRef }) => {
   const [dice, setDice] = React.useContext(DiceContext)
 
   const formik = useFormik({
     initialValues: initialDiceValues,
     onSubmit: values => {
-      console.log(values)
+      console.log(values, 'formik values')
       formik.setValues(initialDiceValues)
+      rollDice(values)
+      setDice({ greenDice: 0, yellowDice: 0 })
     },
   })
+
+  function rollDice(values: any) {
+    console.log(values)
+    const userRoll: IRoll = Object.entries(values).reduce((acc: any, dieArray: any) => {
+      console.log(acc, dieArray)
+      return roll
+    }, roll)
+  }
 
   React.useEffect(() => {
     // TODO: Adding formik to dep array causes infinite loop
@@ -32,6 +44,7 @@ const DicePanel: React.FC = () => {
       ability: dice.greenDice,
       proficiency: dice.yellowDice,
     })
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [dice])
 
   // TODO: add svg component as nested child of <Die>
