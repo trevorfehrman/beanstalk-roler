@@ -1,5 +1,5 @@
 import * as React from 'react'
-import { Formik, Form, FieldInputProps, FormikHelpers } from 'formik'
+import { Formik, Form, FieldInputProps, FormikHelpers, useFormik } from 'formik'
 
 import { Button, HStack } from '@chakra-ui/react'
 
@@ -17,39 +17,68 @@ export type FormikProps = {
 const DicePanel: React.FC = () => {
   const [dice, setDice] = React.useContext(DiceContext)
 
-  function handleSubmit(values: IDicePanel) {
-    console.log(values)
-  }
+  const formik = useFormik({
+    initialValues: initialDiceValues,
+    onSubmit: values => {
+      console.log(values)
+      formik.setValues(initialDiceValues)
+    },
+  })
+
+  React.useEffect(() => {
+    // TODO: Adding formik to dep array causes infinite loop
+    formik.setValues({
+      ...initialDiceValues,
+      ability: dice.greenDice,
+      proficiency: dice.yellowDice,
+    })
+  }, [dice])
 
   // TODO: add svg component as nested child of <Die>
   return (
     <div>
-      <Formik
-        initialValues={{
-          ability: dice.greenDice,
-          proficiency: dice.yellowDice,
-          boost: 0,
-          challenge: 0,
-          difficulty: 0,
-          setback: 0,
-        }}
-        onSubmit={handleSubmit}
-      >
-        {formik => (
-          <Form>
-            {JSON.stringify(dice)}
-            <Button type="submit">Roll</Button>
-            <HStack>
-              <Die name="boost" />
-              <Die name="setback" />
-              <Die name="ability" />
-              <Die name="difficulty" />
-              <Die name="proficiency" />
-              <Die name="challenge" />
-            </HStack>
-          </Form>
-        )}
-      </Formik>
+      <form onSubmit={formik.handleSubmit}>
+        {JSON.stringify(dice)}
+        <Button type="submit">Roll</Button>
+        <HStack>
+          <Die
+            name="boost"
+            getFieldProps={formik.getFieldProps}
+            setFieldValue={formik.setFieldValue}
+            value={formik.values.boost}
+          />
+          <Die
+            name="setback"
+            getFieldProps={formik.getFieldProps}
+            setFieldValue={formik.setFieldValue}
+            value={formik.values.setback}
+          />
+          <Die
+            name="ability"
+            getFieldProps={formik.getFieldProps}
+            setFieldValue={formik.setFieldValue}
+            value={formik.values.ability}
+          />
+          <Die
+            name="difficulty"
+            getFieldProps={formik.getFieldProps}
+            setFieldValue={formik.setFieldValue}
+            value={formik.values.difficulty}
+          />
+          <Die
+            name="proficiency"
+            getFieldProps={formik.getFieldProps}
+            setFieldValue={formik.setFieldValue}
+            value={formik.values.proficiency}
+          />
+          <Die
+            name="challenge"
+            getFieldProps={formik.getFieldProps}
+            setFieldValue={formik.setFieldValue}
+            value={formik.values.challenge}
+          />
+        </HStack>
+      </form>
     </div>
   )
 }

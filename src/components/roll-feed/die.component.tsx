@@ -1,20 +1,25 @@
 import * as React from 'react'
-import { useFormikContext } from 'formik'
 
 import { FiPlus, FiMinus } from 'react-icons/fi'
 import { Button, Input, Stack } from '@chakra-ui/react'
 import { IDicePanel } from 'interfaces-and-types/roll.interface'
 
-const Die: React.FC<{ name: keyof IDicePanel }> = ({ name }) => {
-  const formik = useFormikContext<IDicePanel>()
+type DieProps = {
+  name: keyof IDicePanel
+  getFieldProps: (field: string) => void
+  setFieldValue: (field: string, value: number) => void
+  value: number
+}
+
+const Die: React.FC<DieProps> = ({ name, getFieldProps, setFieldValue, value }) => {
   return (
     <Stack>
-      <Button onClick={() => formik.setFieldValue(name, Number(formik.values[name]) + 1)}>
+      <Button onClick={() => setFieldValue(name, Number(value) + 1)}>
         <FiPlus />
       </Button>
       <div>{name}</div>
-      <Input size="lg" {...formik.getFieldProps(name)} />
-      <Button onClick={() => formik.setFieldValue(name, Number(formik.values[name]) - 1)}>
+      <Input size="lg" {...getFieldProps(name)} />
+      <Button onClick={() => setFieldValue(name, Number(value) - 1)}>
         <FiMinus />
       </Button>
     </Stack>
