@@ -1,7 +1,20 @@
 import * as React from 'react'
 import { useParams } from 'react-router-dom'
 import { useFirestoreCollectionData, useFirestore } from 'reactfire'
-import { preProcessFile } from 'typescript'
+import styled from '@emotion/styled'
+
+import { DicePanel } from './dice-panel.component'
+
+const RollFeedContainer = styled.div({
+  height: '100vh',
+  position: 'fixed',
+  right: 0,
+  width: '33%',
+  display: 'flex',
+  flexDirection: 'column',
+  justifyContent: 'flex-end',
+  padding: '0 2rem 2rem 0',
+})
 
 const RollFeed: React.FC = () => {
   const { sessionId } = useParams<{ sessionId: string }>()
@@ -9,14 +22,13 @@ const RollFeed: React.FC = () => {
   const sessionsRollsRef = useFirestore().collection('sessions').doc(sessionId).collection('sessions-rolls')
   const rolls = useFirestoreCollectionData(sessionsRollsRef)
 
-  console.log(rolls)
-
   return (
-    <div>
-      {rolls.map(roll => (
-        <div key={roll.playerName as string}>{JSON.stringify(roll)}</div>
+    <RollFeedContainer>
+      {rolls.map((roll, i) => (
+        <div key={i}>{JSON.stringify(roll)}</div>
       ))}
-    </div>
+      <DicePanel />
+    </RollFeedContainer>
   )
 }
 

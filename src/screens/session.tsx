@@ -5,12 +5,11 @@ import { User } from 'firebase/app'
 import { Button, ButtonGroup, Text, Flex } from '@chakra-ui/react'
 
 import { ICharacter } from 'interfaces-and-types/character-sheet.interface'
-import { Dice } from 'interfaces-and-types/dice-type'
 
 import { CharacterSheetContainer } from 'components/character-sheet/character-sheet-container.component'
 import { RollFeed } from 'components/roll-feed/roll-feed.component'
 
-export const DiceContext = React.createContext<[Dice, (dice: Dice) => void] | null>(null)
+export const DiceContext = React.createContext<any>(null)
 
 const Session: React.FC = () => {
   const [character, setCharacter] = React.useState<ICharacter>()

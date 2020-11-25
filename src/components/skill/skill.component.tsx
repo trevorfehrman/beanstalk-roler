@@ -15,6 +15,7 @@ import { SkillBox } from 'styled-components/skill-box'
 import { SkillTag } from 'styled-components/skill-tag'
 import { SkillButton } from 'styled-components/skill-button'
 import { skillNameMap } from 'constants/skill-name-map.constant'
+import { DiceContext } from 'screens/session'
 
 type SkillProps = {
   leafKey: string
@@ -25,13 +26,14 @@ type SkillProps = {
 const Skill: React.FC<SkillProps> = ({ skillValue, path, leafKey }) => {
   const formik = useFormikContext<ICharacter>()
   const edit = React.useContext(EditContext)
+  const [_, setDice] = React.useContext(DiceContext)
   const theme = useTheme()
   const relatedAttributeValue = formik.getFieldProps(getRelatedAttribute(leafKey)).value
   const [dice] = useDice(relatedAttributeValue, skillValue)
 
   return (
     <Flex align="flex-start" margin=".5rem" direction="column">
-      <Flex>
+      <Flex cursor="pointer" onClick={() => setDice(dice)}>
         <SkillTag colorScheme="cyan">{skillNameMap[leafKey]}</SkillTag>
         {Array.from({ length: dice.yellowDice }).map((_, i) => (
           <SkillBox color={theme.colors.brand.yellow} key={i} />
