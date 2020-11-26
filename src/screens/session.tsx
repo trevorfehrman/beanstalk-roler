@@ -9,6 +9,7 @@ import { ICharacter } from 'interfaces-and-types/character-sheet.interface'
 import { CharacterSheetContainer } from 'components/character-sheet/character-sheet-container.component'
 import { RollFeed } from 'components/roll-feed/roll-feed.component'
 
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
 export const DiceContext = React.createContext<any>(null)
 
 const Session: React.FC = () => {

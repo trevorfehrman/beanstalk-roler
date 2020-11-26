@@ -26,6 +26,7 @@ type SkillProps = {
 const Skill: React.FC<SkillProps> = ({ skillValue, path, leafKey }) => {
   const formik = useFormikContext<ICharacter>()
   const edit = React.useContext(EditContext)
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const [_, setDice] = React.useContext(DiceContext)
   const theme = useTheme()
   const relatedAttributeValue = formik.getFieldProps(getRelatedAttribute(leafKey)).value
