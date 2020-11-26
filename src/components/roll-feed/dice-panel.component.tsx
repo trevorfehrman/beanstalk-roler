@@ -6,7 +6,7 @@ import { Button, HStack } from '@chakra-ui/react'
 
 import { IRoll } from 'interfaces-and-types/roll.interface'
 import { initialDiceValues } from 'constants/dice-panel-initial-values.constant'
-import { roll } from 'constants/roll.constant'
+import { rollDice } from 'utils/roll-dice'
 
 import { Die } from './die.component'
 import { DiceContext } from 'screens/session'
@@ -21,21 +21,14 @@ const DicePanel: React.FC<{ rollsRef: firestore.CollectionReference }> = ({ roll
 
   const formik = useFormik({
     initialValues: initialDiceValues,
-    onSubmit: values => {
-      console.log(values, 'formik values')
+    onSubmit: dicePanelInput => {
       formik.setValues(initialDiceValues)
-      rollDice(values)
       setDice({ greenDice: 0, yellowDice: 0 })
+      const roll = rollDice(dicePanelInput)
+
+      rollsRef.add(roll)
     },
   })
-
-  function rollDice(values: any) {
-    console.log(values)
-    const userRoll: IRoll = Object.entries(values).reduce((acc: any, dieArray: any) => {
-      console.log(acc, dieArray)
-      return roll
-    }, roll)
-  }
 
   React.useEffect(() => {
     // TODO: Adding formik to dep array causes infinite loop
@@ -51,7 +44,6 @@ const DicePanel: React.FC<{ rollsRef: firestore.CollectionReference }> = ({ roll
   return (
     <div>
       <form onSubmit={formik.handleSubmit}>
-        {JSON.stringify(dice)}
         <Button type="submit">Roll</Button>
         <HStack>
           <Die
