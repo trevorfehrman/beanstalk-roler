@@ -4,6 +4,8 @@ import { useFirestoreCollectionData, useFirestore } from 'reactfire'
 import styled from '@emotion/styled'
 
 import { DicePanel } from './dice-panel.component'
+import { Roll } from './roll.component'
+import { IRoll } from 'interfaces-and-types/roll.interface'
 
 const RollFeedContainer = styled.div({
   height: '100vh',
@@ -20,12 +22,12 @@ const RollFeed: React.FC = () => {
   const { sessionId } = useParams<{ sessionId: string }>()
 
   const sessionsRollsRef = useFirestore().collection('sessions').doc(sessionId).collection('sessions-rolls')
-  const rolls = useFirestoreCollectionData(sessionsRollsRef)
+  const rolls = useFirestoreCollectionData<IRoll>(sessionsRollsRef, { idField: 'docId' })
 
   return (
     <RollFeedContainer>
-      {rolls.map((roll, i) => (
-        <div key={i}>{JSON.stringify(roll)}</div>
+      {rolls.map(roll => (
+        <Roll key={roll.docId} roll={roll} />
       ))}
       <DicePanel rollsRef={sessionsRollsRef} />
     </RollFeedContainer>

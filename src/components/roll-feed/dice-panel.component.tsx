@@ -24,9 +24,11 @@ const DicePanel: React.FC<{ rollsRef: firestore.CollectionReference }> = ({ roll
     onSubmit: dicePanelInput => {
       formik.setValues(initialDiceValues)
       setDice({ greenDice: 0, yellowDice: 0 })
-      const roll = rollDice(dicePanelInput)
+      const [roll, results] = rollDice(dicePanelInput)
 
-      rollsRef.add(roll)
+      console.log(roll, results)
+
+      // rollsRef.add(roll)
     },
   })
 
