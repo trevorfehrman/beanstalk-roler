@@ -18,10 +18,6 @@ export function rollDice(dicePanelInput: IDicePanel): [IRoll, IResults] {
         acc[die as 'ability' | 'boost' | 'challenge' | 'difficulty' | 'proficiency' | 'setback'].push(
           rollDie(die as Die),
         )
-        // acc[die as 'ability' | 'boost' | 'challenge' | 'difficulty' | 'proficiency' | 'setback'] = [
-        //   ...acc[die as 'ability' | 'boost' | 'challenge' | 'difficulty' | 'proficiency' | 'setback'],
-        //   ...rollDie(die as Die),
-        // ]
       }
       return { ...acc }
     },
@@ -34,8 +30,6 @@ export function rollDice(dicePanelInput: IDicePanel): [IRoll, IResults] {
       setback: [],
     },
   )
-  const results = Object.entries(userRoll)
-  console.log(results, userRoll, 'hiiiiiiii')
   const flatResults: IResults = Object.values(userRoll)
     .flat(2)
     .reduce(

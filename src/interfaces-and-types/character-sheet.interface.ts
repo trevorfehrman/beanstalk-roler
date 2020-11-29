@@ -1,5 +1,5 @@
 interface ICharacter {
-  docId: string
+  docId?: string
   attributes: IAttributes
   characterDescription: ICharacterDescription
   characterDetails: ICharacterDetails
@@ -214,4 +214,9 @@ export type {
   ISocialSkills,
   IGeneralSkills,
   ICombatSkills,
+  ICriticalInjury,
+  IPersonalGear,
+  ICustomSkill,
+  ITalent,
+  IWeapon,
 }
