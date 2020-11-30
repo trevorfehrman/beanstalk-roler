@@ -16,6 +16,16 @@ import {
 import { CharacterSheetContainer } from 'components/character-sheet/character-sheet-container.component'
 import { RollFeed } from 'components/roll-feed/roll-feed.component'
 import { Success } from 'assets/success'
+import { Ability } from 'assets/ability'
+import { Boost } from 'assets/boost'
+import { Challenge } from 'assets/challenge'
+import { Despair } from 'assets/despair'
+import { Difficulty } from 'assets/difficulty'
+import { Failure } from 'assets/failure'
+import { Proficiency } from 'assets/proficiency'
+import { Setback } from 'assets/setback'
+import { Threat } from 'assets/threat'
+import { Triumph } from 'assets/triumph'
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 export const DiceContext = React.createContext<any>(null)
@@ -159,7 +169,17 @@ const Session: React.FC = () => {
               </Button>
             ))}
             <Button onClick={() => createCharacter()}>Create Character +</Button>
-            <Success />
+            <Triumph size="6 rem" />
+            <Success color="#000" size="6 rem" />
+            <Ability size="6 rem" />
+            <Boost size="6 rem" />
+            <Challenge size="6 rem" />
+            <Despair size="6 rem" />
+            <Difficulty size="6 rem" />
+            <Failure size="6 rem" />
+            <Proficiency size="6 rem" />
+            <Setback size="6 rem" />
+            <Threat size="6 rem" />
           </ButtonGroup>
         </>
       )}
