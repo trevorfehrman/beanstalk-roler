@@ -15,6 +15,7 @@ import {
 
 import { CharacterSheetContainer } from 'components/character-sheet/character-sheet-container.component'
 import { RollFeed } from 'components/roll-feed/roll-feed.component'
+import { Success } from 'assets/success'
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 export const DiceContext = React.createContext<any>(null)
@@ -158,6 +159,7 @@ const Session: React.FC = () => {
               </Button>
             ))}
             <Button onClick={() => createCharacter()}>Create Character +</Button>
+            <Success />
           </ButtonGroup>
         </>
       )}

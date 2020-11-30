@@ -1,0 +1,8 @@
+<svg width="180mm" height="180mm" version="1.1" viewBox="0 0 180 180" xmlns="http://www.w3.org/2000/svg">
+ <g transform="matrix(1.423 0 0 1.423 89.32 89.617)">
+  <path d="m49.237 25h-99.985l50.131-86.237z" style="fill:#389138;stroke-linejoin:round;stroke-width:2;stroke:#000"/>
+  <path d="m0.61704 61.237-51.365-36.237h99.985z" style="fill:#368c36;stroke-linejoin:round;stroke-width:2;stroke:#000"/>
+  <path d="m49.237 25-49.854-86.237 51.365 36.237z" style="fill:#2c742c;stroke-linejoin:round;stroke-width:2;stroke:#000"/>
+  <path d="m-0.61704-61.237-50.131 86.237 1.5114-50z" style="fill:#1c4a1c;stroke-linejoin:round;stroke-width:2;stroke:#000"/>
+ </g>
+</svg>
