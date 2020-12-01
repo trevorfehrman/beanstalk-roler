@@ -10,11 +10,11 @@ type RollProps = {
 
 const Roll: React.FC<RollProps> = ({ roll }) => {
   return (
-    <div>
+    <div style={{ overflowY: 'scroll' }}>
       {Object.entries(roll).map(die => {
         // TODO Add Character Name Back
         if (die[0] === 'characterName') return
-        return <ResultDie key={uuidv4()} die={die} />
+        return die[1].map((results: string[]) => <ResultDie key={uuidv4()} die={die[0]} results={results} />)
       })}
     </div>
   )

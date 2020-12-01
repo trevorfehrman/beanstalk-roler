@@ -10,23 +10,24 @@ import { Proficiency } from 'assets/proficiency'
 import { Setback } from 'assets/setback'
 
 type ResultDieProps = {
-  die: [string, string[][]]
+  die: string
+  results: string[]
 }
 
-const ResultDie: React.FC<ResultDieProps> = ({ die }) => {
+const ResultDie: React.FC<ResultDieProps> = ({ die, results }) => {
   return (
     <div>
-      {die[1].length ? (
+      {results.length ? (
         <>
-          <strong>{die[1].length ? die[0] : null}</strong>
+          <strong>{results.length ? die : null}</strong>
           {(() => {
-            switch (die[0]) {
+            switch (die) {
               case Die.Ability:
                 return <Ability size="4rem" />
               case Die.Boost:
                 return (
                   <Boost size="4rem">
-                    {die[1].map(icon => (
+                    {results.map(icon => (
                       <span key={uuidv4()}>{icon}</span>
                     ))}
                   </Boost>
@@ -45,13 +46,6 @@ const ResultDie: React.FC<ResultDieProps> = ({ die }) => {
           })()}
         </>
       ) : null}
-      {/* {die[1].map(result => (
-        <div key={uuidv4()}>
-          {result.map(icon => (
-            <span key={uuidv4()}>{icon}</span>
-          ))}
-        </div>
-      ))} */}
     </div>
   )
 }
