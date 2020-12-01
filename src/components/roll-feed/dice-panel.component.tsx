@@ -8,7 +8,7 @@ import { IRoll } from 'interfaces-and-types/roll.interface'
 import { initialDiceValues } from 'constants/dice-panel-initial-values.constant'
 import { rollDice } from 'utils/roll-dice'
 
-import { Die } from './die.component'
+import { Die } from './panel-die.component'
 import { DiceContext } from 'screens/session'
 
 export type FormikProps = {
@@ -26,9 +26,8 @@ const DicePanel: React.FC<{ rollsRef: firestore.CollectionReference }> = ({ roll
       setDice({ greenDice: 0, yellowDice: 0 })
       const [roll, results] = rollDice(dicePanelInput)
 
-      console.log(roll, results)
-
-      // rollsRef.add(roll)
+      // Firebase will not accept nested arrays, so I'm serializing the object.
+      rollsRef.add({ roll: JSON.stringify(roll) })
     },
   })
 

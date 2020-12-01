@@ -14,6 +14,7 @@
     "@types/react": "~16.9.56",
     "@types/react-dom": "~16.9.9",
     "@types/react-router-dom": "~5.1.6",
+    "@types/uuid": "~8.3.0",
     "debounce-fn": "~4.0.0",
     "firebase": "~7.17.1",
     "formik": "~2.2.5",
@@ -27,6 +28,7 @@
     "reactfire": "~2.0.3",
     "typescript": "~4.0.5",
     "use-debounce": "~5.1.0",
+    "uuid": "~8.3.1",
     "web-vitals": "~0.2.4"
   },
   "scripts": {

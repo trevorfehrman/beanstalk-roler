@@ -169,7 +169,7 @@ const Session: React.FC = () => {
               </Button>
             ))}
             <Button onClick={() => createCharacter()}>Create Character +</Button>
-            <Triumph size="6 rem" />
+            {/* <Triumph size="6 rem" />
             <Success color="#000" size="6 rem" />
             <Ability size="6 rem" />
             <Boost size="6 rem" />
@@ -179,7 +179,7 @@ const Session: React.FC = () => {
             <Failure size="6 rem" />
             <Proficiency size="6 rem" />
             <Setback size="6 rem" />
-            <Threat size="6 rem" />
+            <Threat size="6 rem" /> */}
           </ButtonGroup>
         </>
       )}

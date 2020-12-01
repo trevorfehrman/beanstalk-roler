@@ -1,5 +1,4 @@
 interface IRoll {
-  docId?: string
   characterName?: string
   ability: string[][]
   boost: string[][]

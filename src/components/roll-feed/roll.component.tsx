@@ -1,6 +1,8 @@
 import * as React from 'react'
+import { v4 as uuidv4 } from 'uuid'
 
 import { IRoll } from 'interfaces-and-types/roll.interface'
+import { ResultDie } from './result-die.component'
 
 type RollProps = {
   roll: IRoll
@@ -9,16 +11,10 @@ type RollProps = {
 const Roll: React.FC<RollProps> = ({ roll }) => {
   return (
     <div>
-      {Object.entries(roll).map(([die, results]) => {
-        if (die === 'docId' || die === 'characterName') return
-        return (
-          <>
-            {results.length ? <span key={die}>{die.toUpperCase()}</span> : null}
-            {results.map((result: number, i: number) => (
-              <span key={i}>{result}</span>
-            ))}
-          </>
-        )
+      {Object.entries(roll).map(die => {
+        // TODO Add Character Name Back
+        if (die[0] === 'characterName') return
+        return <ResultDie key={uuidv4()} die={die} />
       })}
     </div>
   )
