@@ -16,7 +16,10 @@ export type FormikProps = {
   field: FieldInputProps<keyof IRoll>
 }
 
-const DicePanel: React.FC<{ rollsRef: firestore.CollectionReference }> = ({ rollsRef }) => {
+const DicePanel: React.FC<{ rollsRef: firestore.CollectionReference; characterName: string }> = ({
+  rollsRef,
+  characterName,
+}) => {
   const [dice, setDice] = React.useContext(DiceContext)
 
   const formik = useFormik({
@@ -27,7 +30,7 @@ const DicePanel: React.FC<{ rollsRef: firestore.CollectionReference }> = ({ roll
       const [roll, results] = rollDice(dicePanelInput)
 
       // Firebase will not accept nested arrays, so I'm serializing the object.
-      rollsRef.add({ roll: JSON.stringify(roll) })
+      rollsRef.add({ roll: JSON.stringify(roll), createdAt: Date.now(), characterName })
     },
   })
 

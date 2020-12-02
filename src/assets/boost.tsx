@@ -2,7 +2,7 @@ import * as React from 'react'
 
 const Boost: React.FC<{ size: string }> = ({ size, children }) => {
   return (
-    <>
+    <div style={{ position: 'relative', display: 'inline-block' }}>
       <svg width={size} height={size} viewBox="0 0 180 180" version="1.1" id="svg8">
         <g id="layer1">
           <g transform="matrix(1.2790435,0,0,1.3101501,92.021526,88.199785)" id="g980">
@@ -33,8 +33,18 @@ const Boost: React.FC<{ size: string }> = ({ size, children }) => {
           </g>
         </g>
       </svg>
-      {children}
-    </>
+      <div
+        style={{
+          display: 'flex',
+          position: 'absolute',
+          top: '40%',
+          left: '58%',
+          transform: 'translateX(-50%) translateY(-50%)',
+        }}
+      >
+        {children}
+      </div>
+    </div>
   )
 }
 

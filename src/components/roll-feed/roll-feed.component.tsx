@@ -18,19 +18,27 @@ const RollFeedContainer = styled.div({
   padding: '0 2rem 2rem 0',
 })
 
-const RollFeed: React.FC = () => {
+const RollFeed: React.FC<{ characterName: string }> = ({ characterName }) => {
   const { sessionId } = useParams<{ sessionId: string }>()
 
   const sessionsRollsRef = useFirestore().collection('sessions').doc(sessionId).collection('rolls')
-  const rolls = useFirestoreCollectionData<{ roll: string; docId: string }>(sessionsRollsRef, { idField: 'docId' })
+  const sessionsRollsQuery = sessionsRollsRef.orderBy('createdAt', 'desc').limit(20)
+  const rolls = useFirestoreCollectionData<{ roll: string; docId: string; createdAt: Date; characterName: string }>(
+    sessionsRollsQuery,
+    {
+      idField: 'docId',
+    },
+  )
 
   return (
     <RollFeedContainer>
-      {rolls.map(stringRoll => {
-        const roll: IRoll = JSON.parse(stringRoll.roll)
-        return <Roll key={stringRoll.docId} roll={roll} />
-      })}
-      <DicePanel rollsRef={sessionsRollsRef} />
+      <div style={{ display: 'flex', flexDirection: 'column-reverse' }}>
+        {rolls.map(stringRoll => {
+          const roll: IRoll = JSON.parse(stringRoll.roll)
+          return <Roll key={stringRoll.docId} roll={roll} />
+        })}
+      </div>
+      <DicePanel rollsRef={sessionsRollsRef} characterName={characterName} />
     </RollFeedContainer>
   )
 }

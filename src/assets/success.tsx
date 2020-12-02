@@ -2,7 +2,7 @@ import * as React from 'react'
 
 const Success: React.FC<{ size: string; color: string }> = ({ size, color }) => {
   return (
-    <div>
+    <>
       <svg width={size} height={size} viewBox="0 0 180 180">
         <g id="layer1">
           <path
@@ -15,7 +15,7 @@ const Success: React.FC<{ size: string; color: string }> = ({ size, color }) => 
           />
         </g>
       </svg>
-    </div>
+    </>
   )
 }
 
