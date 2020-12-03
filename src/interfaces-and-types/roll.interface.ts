@@ -1,11 +1,18 @@
 interface IRoll {
-  characterName?: string
   ability: string[][]
   boost: string[][]
   challenge: string[][]
   difficulty: string[][]
   proficiency: string[][]
   setback: string[][]
+}
+
+interface IFirebaseRoll {
+  roll: string
+  characterName: string
+  createdAt: number
+  results: IResults
+  docId: string
 }
 
 interface IDicePanel {
@@ -113,4 +120,4 @@ export enum Result {
   Blank = 'blank',
 }
 
-export type { IRoll, IDicePanel, IDieResultMap, IResults }
+export type { IRoll, IDicePanel, IDieResultMap, IResults, IFirebaseRoll }

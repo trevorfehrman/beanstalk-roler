@@ -4,7 +4,7 @@ import { firestore } from 'firebase'
 
 import { Button, HStack } from '@chakra-ui/react'
 
-import { IRoll } from 'interfaces-and-types/roll.interface'
+import { IResults, IRoll } from 'interfaces-and-types/roll.interface'
 import { initialDiceValues } from 'constants/dice-panel-initial-values.constant'
 import { rollDice } from 'utils/roll-dice'
 
@@ -16,10 +16,10 @@ export type FormikProps = {
   field: FieldInputProps<keyof IRoll>
 }
 
-const DicePanel: React.FC<{ rollsRef: firestore.CollectionReference; characterName: string }> = ({
-  rollsRef,
-  characterName,
-}) => {
+const DicePanel: React.FC<{
+  rollsRef: firestore.CollectionReference
+  characterName: string
+}> = ({ rollsRef, characterName }) => {
   const [dice, setDice] = React.useContext(DiceContext)
 
   const formik = useFormik({
@@ -30,7 +30,7 @@ const DicePanel: React.FC<{ rollsRef: firestore.CollectionReference; characterNa
       const [roll, results] = rollDice(dicePanelInput)
 
       // Firebase will not accept nested arrays, so I'm serializing the object.
-      rollsRef.add({ roll: JSON.stringify(roll), createdAt: Date.now(), characterName })
+      rollsRef.add({ roll: JSON.stringify(roll), createdAt: Date.now(), characterName, results })
     },
   })
 
