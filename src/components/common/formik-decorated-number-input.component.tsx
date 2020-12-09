@@ -17,7 +17,7 @@ import { FormikProps } from '../../interfaces-and-types/formik-props.type'
 
 type FormikDecoratedNumberInputProps = {
   characterLeaf: string
-  max?: string
+  max?: string | number
   size?: 'sm' | 'md' | 'lg'
 }
 
@@ -41,7 +41,7 @@ const FormikDecoratedNumberInput: React.FC<FormikDecoratedNumberInputProps> = ({
       {({ form, field }: FormikProps) => (
         <NumberInput
           min={0}
-          max={getLeaf(max, formik.values) as number}
+          max={typeof max === 'string' ? (getLeaf(max as string, formik.values) as number) : max}
           value={getLeaf(characterLeaf, formik.values) as number}
           onChange={val => {
             form.setFieldValue(field.name, val)

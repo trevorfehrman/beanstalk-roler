@@ -10,12 +10,12 @@ const Attributes: React.FC = () => {
   return (
     <>
       <HStack>
-        <TaggedNumberInput title={Attr.Brawn} characterLeaf={CharLeaf.Brawn} />
-        <TaggedNumberInput title={Attr.Agility} characterLeaf={CharLeaf.Agility} />
-        <TaggedNumberInput title={Attr.Intellect} characterLeaf={CharLeaf.Intellect} />
-        <TaggedNumberInput title={Attr.Cunning} characterLeaf={CharLeaf.Cunning} />
-        <TaggedNumberInput title={Attr.Willpower} characterLeaf={CharLeaf.Willpower} />
-        <TaggedNumberInput title={Attr.Presence} characterLeaf={CharLeaf.Presence} />
+        <TaggedNumberInput max={5} title={Attr.Brawn} characterLeaf={CharLeaf.Brawn} />
+        <TaggedNumberInput max={5} title={Attr.Agility} characterLeaf={CharLeaf.Agility} />
+        <TaggedNumberInput max={5} title={Attr.Intellect} characterLeaf={CharLeaf.Intellect} />
+        <TaggedNumberInput max={5} title={Attr.Cunning} characterLeaf={CharLeaf.Cunning} />
+        <TaggedNumberInput max={5} title={Attr.Willpower} characterLeaf={CharLeaf.Willpower} />
+        <TaggedNumberInput max={5} title={Attr.Presence} characterLeaf={CharLeaf.Presence} />
       </HStack>
     </>
   )

@@ -5,7 +5,7 @@ import styled from '@emotion/styled'
 
 import { DicePanel } from './dice-panel.component'
 import { Roll } from './roll.component'
-import { IFirebaseRoll, IResults, IRoll } from 'interfaces-and-types/roll.interface'
+import { IFirebaseRoll, IRoll } from 'interfaces-and-types/roll.interface'
 
 const RollFeedContainer = styled.div({
   height: '100vh',
@@ -33,7 +33,12 @@ const RollFeed: React.FC<{ characterName: string }> = ({ characterName }) => {
         {rolls.map(firebaseRoll => {
           const roll: IRoll = JSON.parse(firebaseRoll.roll)
           return (
-            <Roll key={firebaseRoll.docId} roll={roll} characterName={characterName} results={firebaseRoll.results} />
+            <Roll
+              key={firebaseRoll.docId}
+              roll={roll}
+              characterName={firebaseRoll.characterName}
+              results={firebaseRoll.results}
+            />
           )
         })}
       </div>

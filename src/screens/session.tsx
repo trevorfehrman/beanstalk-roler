@@ -2,7 +2,7 @@ import * as React from 'react'
 import { useUser, useFirestore, useFirestoreCollectionData } from 'reactfire'
 import { User } from 'firebase/app'
 
-import { Button, ButtonGroup, Text, Flex } from '@chakra-ui/react'
+import { Button, ButtonGroup, Text, Flex, Center, Stack } from '@chakra-ui/react'
 
 import {
   ICharacter,
@@ -149,17 +149,19 @@ const Session: React.FC = () => {
           </DiceContext.Provider>
         </>
       ) : (
-        <>
-          <Text fontSize="2xl">Select Character</Text>
-          <ButtonGroup>
-            {userCharacters.map(char => (
-              <Button key={char.docId} onClick={() => setCharacter(char)}>
-                {char.characterDetails.name || 'Click to edit new character'}
-              </Button>
-            ))}
-            <Button onClick={() => createCharacter()}>Create Character +</Button>
-          </ButtonGroup>
-        </>
+        <Center height="100vh">
+          <Stack>
+            <Text fontSize="2xl">Select Character</Text>
+            <ButtonGroup>
+              {userCharacters.map(char => (
+                <Button key={char.docId} onClick={() => setCharacter(char)}>
+                  {char.characterDetails.name || 'Click to edit new character'}
+                </Button>
+              ))}
+              <Button onClick={() => createCharacter()}>Create Character +</Button>
+            </ButtonGroup>
+          </Stack>
+        </Center>
       )}
     </>
   )

@@ -5,6 +5,7 @@ import { useFirestore } from 'reactfire'
 import styled from '@emotion/styled'
 
 import { Button } from '@chakra-ui/react'
+import { FiEdit } from 'react-icons/fi'
 
 import { ICharacter } from '../../interfaces-and-types/character-sheet.interface'
 
@@ -21,6 +22,13 @@ export const EditContext = React.createContext<boolean>(false)
 
 const StyledForm = styled(Form)({
   width: '66%',
+  position: 'relative',
+})
+
+const StyledButton = styled(Button)({
+  position: 'absolute',
+  right: '1.2rem',
+  top: '1.2rem',
 })
 
 type CharacterSheetContainerProps = {
@@ -42,8 +50,16 @@ const CharacterSheetContainer: React.FC<CharacterSheetContainerProps> = ({ chara
       <EditContext.Provider value={edit}>
         <Formik initialValues={character} onSubmit={handleSubmit}>
           <StyledForm>
-            {edit ? <Button type="submit">Submit</Button> : null}
-            {!edit ? <Button onClick={() => setEdit(isEdit => !isEdit)}>Edit Mode</Button> : null}
+            {edit ? (
+              <StyledButton size="sm" type="submit">
+                Submit
+              </StyledButton>
+            ) : null}
+            {!edit ? (
+              <StyledButton size="sm" onClick={() => setEdit(isEdit => !isEdit)}>
+                <FiEdit />
+              </StyledButton>
+            ) : null}
             <CharacterSheet>
               <SheetSection title="Details:" gridRow={TemplateArea.Details} gridColumn={TemplateArea.Details}>
                 <CharacterDetails />

@@ -2,14 +2,22 @@ import * as React from 'react'
 import { FieldInputProps, FormikHelpers, useFormik } from 'formik'
 import { firestore } from 'firebase'
 
-import { Button, HStack } from '@chakra-ui/react'
+import { Button, HStack, Text } from '@chakra-ui/react'
 
-import { IResults, IRoll } from 'interfaces-and-types/roll.interface'
+import { IRoll } from 'interfaces-and-types/roll.interface'
 import { initialDiceValues } from 'constants/dice-panel-initial-values.constant'
 import { rollDice } from 'utils/roll-dice'
 
-import { Die } from './panel-die.component'
 import { DiceContext } from 'screens/session'
+
+import { Boost } from 'assets/boost'
+import { Setback } from 'assets/setback'
+import { Ability } from 'assets/ability'
+import { Difficulty } from 'assets/difficulty'
+import { Proficiency } from 'assets/proficiency'
+import { Challenge } from 'assets/challenge'
+
+import { Die } from './panel-die.component'
 
 export type FormikProps = {
   form: FormikHelpers<keyof IRoll>
@@ -44,48 +52,43 @@ const DicePanel: React.FC<{
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [dice])
 
-  // TODO: add svg component as nested child of <Die>
   return (
-    <div>
+    <div style={{ padding: '1rem', border: '2px solid lightgray', borderRadius: '.375rem', marginTop: '1rem' }}>
       <form onSubmit={formik.handleSubmit}>
-        <Button type="submit">Roll</Button>
+        <Button marginBottom="1rem" type="submit" colorScheme="teal">
+          Roll
+        </Button>
         <HStack>
-          <Die
-            name="boost"
-            getFieldProps={formik.getFieldProps}
-            setFieldValue={formik.setFieldValue}
-            value={formik.values.boost}
-          />
-          <Die
-            name="setback"
-            getFieldProps={formik.getFieldProps}
-            setFieldValue={formik.setFieldValue}
-            value={formik.values.setback}
-          />
-          <Die
-            name="ability"
-            getFieldProps={formik.getFieldProps}
-            setFieldValue={formik.setFieldValue}
-            value={formik.values.ability}
-          />
-          <Die
-            name="difficulty"
-            getFieldProps={formik.getFieldProps}
-            setFieldValue={formik.setFieldValue}
-            value={formik.values.difficulty}
-          />
-          <Die
-            name="proficiency"
-            getFieldProps={formik.getFieldProps}
-            setFieldValue={formik.setFieldValue}
-            value={formik.values.proficiency}
-          />
-          <Die
-            name="challenge"
-            getFieldProps={formik.getFieldProps}
-            setFieldValue={formik.setFieldValue}
-            value={formik.values.challenge}
-          />
+          <Die name="boost" setFieldValue={formik.setFieldValue} value={formik.values.boost}>
+            <Boost size="4rem">
+              <Text color="#ececec">{formik.values.boost}</Text>
+            </Boost>
+          </Die>
+          <Die name="setback" setFieldValue={formik.setFieldValue} value={formik.values.setback}>
+            <Setback size="4rem">
+              <Text color="#ececec">{formik.values.setback}</Text>
+            </Setback>
+          </Die>
+          <Die name="ability" setFieldValue={formik.setFieldValue} value={formik.values.ability}>
+            <Ability size="4rem">
+              <Text color="#ececec">{formik.values.ability}</Text>
+            </Ability>
+          </Die>
+          <Die name="difficulty" setFieldValue={formik.setFieldValue} value={formik.values.difficulty}>
+            <Difficulty size="4rem">
+              <Text color="#ececec">{formik.values.difficulty}</Text>
+            </Difficulty>
+          </Die>
+          <Die name="proficiency" setFieldValue={formik.setFieldValue} value={formik.values.proficiency}>
+            <Proficiency size="4rem">
+              <Text color="#fff">{formik.values.proficiency}</Text>
+            </Proficiency>
+          </Die>
+          <Die name="challenge" setFieldValue={formik.setFieldValue} value={formik.values.challenge}>
+            <Challenge size="4rem">
+              <Text color="#ececec">{formik.values.challenge}</Text>
+            </Challenge>
+          </Die>
         </HStack>
       </form>
     </div>

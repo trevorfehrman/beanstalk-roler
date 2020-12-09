@@ -2,7 +2,7 @@ import * as React from 'react'
 import { Field, useFormikContext } from 'formik'
 
 import { FiPlus, FiMinus } from 'react-icons/fi'
-import { Flex, useTheme } from '@chakra-ui/react'
+import { Flex, useTheme, Text } from '@chakra-ui/react'
 
 import { FormikProps } from 'interfaces-and-types/formik-props.type'
 import { ICharacter } from 'interfaces-and-types/character-sheet.interface'
@@ -62,6 +62,7 @@ const Skill: React.FC<SkillProps> = ({ skillValue, path, leafKey }) => {
               >
                 <FiPlus />
               </SkillButton>
+              <Text marginLeft=".5rem"> Ranking: {field.value}</Text>
             </Flex>
           )}
         </Field>

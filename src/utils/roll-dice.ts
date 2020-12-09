@@ -1,4 +1,4 @@
-import { IRoll, Die, IDicePanel, IDieResultMap, IResults } from 'interfaces-and-types/roll.interface'
+import { IRoll, Die, IDicePanel, IResults } from 'interfaces-and-types/roll.interface'
 import { dieResultMap } from 'constants/die-result.constant'
 
 const dieMap = {
@@ -22,12 +22,12 @@ export function rollDice(dicePanelInput: IDicePanel): [IRoll, IResults] {
       return { ...acc }
     },
     {
-      ability: [],
       boost: [],
-      challenge: [],
-      difficulty: [],
+      ability: [],
       proficiency: [],
       setback: [],
+      difficulty: [],
+      challenge: [],
     },
   )
   const flatResults: IResults = Object.values(userRoll)

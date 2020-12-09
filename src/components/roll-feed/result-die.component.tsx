@@ -36,7 +36,7 @@ const ResultDie: React.FC<ResultDieProps> = ({ die, symbols }) => {
                 return (
                   <Boost size="4rem">
                     {symbols.map(icon => (
-                      <Icon key={uuidv4()} icon={icon} color="#111" size={symbols.length > 1 ? '1.3rem' : '2rem'} />
+                      <Icon key={uuidv4()} icon={icon} color="#ececec" size={symbols.length > 1 ? '1.3rem' : '2rem'} />
                     ))}
                   </Boost>
                 )
@@ -60,7 +60,7 @@ const ResultDie: React.FC<ResultDieProps> = ({ die, symbols }) => {
                 return (
                   <Proficiency size="4rem">
                     {symbols.map(icon => (
-                      <Icon key={uuidv4()} icon={icon} color="#111" size={symbols.length > 1 ? '1rem' : '1.6rem'} />
+                      <Icon key={uuidv4()} icon={icon} color="#fff" size={symbols.length > 1 ? '1rem' : '1.6rem'} />
                     ))}
                   </Proficiency>
                 )
