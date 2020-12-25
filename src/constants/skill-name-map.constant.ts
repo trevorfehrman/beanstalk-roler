@@ -17,7 +17,7 @@ export const skillNameMap: { [leaf: string]: string } = {
   perception: 'Perception (Cun)',
   piloting: 'Piloting (Ag)',
   resilience: 'Resilience (Br)',
-  skullduggery: 'Skullduggery (Cun)',
+  skulduggery: 'Skulduggery (Cun)',
   stealth: 'Stealth (Ag)',
   streetwise: 'Streetwise (Cun)',
   survival: 'Survival (Cun)',

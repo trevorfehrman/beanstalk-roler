@@ -16,7 +16,7 @@ interface ICharacter {
 }
 
 interface IXp {
-  availibleXp: number
+  availableXp: number
   totalXp: number
 }
 
@@ -105,7 +105,7 @@ interface IGeneralSkills {
   perception: number
   piloting: number
   resilience: number
-  skullduggery: number
+  skulduggery: number
   stealth: number
   streetwise: number
   survival: number
@@ -177,7 +177,7 @@ export enum CharLeaf {
   StrainTotal = 'woundStrainAndDefense.strainThreshold.total',
   WoundCurrent = 'woundStrainAndDefense.woundThreshold.current',
   WoundTotal = 'woundStrainAndDefense.woundThreshold.total',
-  XpAvailible = 'xp.availibleXp',
+  XpAvailable = 'xp.availableXp',
   XpTotal = 'xp.totalXp',
   Brawn = 'attributes.brawn',
   Agility = 'attributes.agility',

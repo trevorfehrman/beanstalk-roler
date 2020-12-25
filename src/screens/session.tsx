@@ -94,7 +94,7 @@ const Session: React.FC = () => {
           perception: 0,
           piloting: 0,
           resilience: 0,
-          skullduggery: 0,
+          skulduggery: 0,
           stealth: 0,
           streetwise: 0,
           survival: 0,
@@ -132,7 +132,7 @@ const Session: React.FC = () => {
         },
       },
       xp: {
-        availibleXp: 0,
+        availableXp: 0,
         totalXp: 0,
       },
     } as ICharacter)

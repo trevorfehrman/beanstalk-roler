@@ -18,7 +18,7 @@ export const skillAttributeMap: { [leaf: string]: string } = {
   perception: CharLeaf.Cunning,
   piloting: CharLeaf.Agility,
   resilience: CharLeaf.Brawn,
-  skullduggery: CharLeaf.Cunning,
+  skulduggery: CharLeaf.Cunning,
   stealth: CharLeaf.Agility,
   streetwise: CharLeaf.Cunning,
   survival: CharLeaf.Cunning,

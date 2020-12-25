@@ -18,7 +18,7 @@ const ResultSummary: React.FC<{ results: IResults }> = ({ results }) => {
         </ResultSummaryTag>
       )}
       {results.success === 0 && results.failure === 0 && (
-        <ResultSummaryTag color="inherit" as="span" background="transparent">
+        <ResultSummaryTag color="black" as="span" background="transparent">
           WASH
         </ResultSummaryTag>
       )}

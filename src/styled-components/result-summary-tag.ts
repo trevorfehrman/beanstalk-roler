@@ -1,8 +1,8 @@
 import styled from '@emotion/styled'
 import { Text } from '@chakra-ui/react'
 
-const ResultSummaryTag = styled(Text)<{ background: string }>(props => ({
-  color: 'white',
+const ResultSummaryTag = styled(Text)<{ background: string; color?: string }>(props => ({
+  color: props.color || 'white',
   marginRight: '.5rem',
   padding: '.5rem',
   backgroundColor: props.background,
