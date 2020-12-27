@@ -3,7 +3,6 @@ import { Field, useFormikContext } from 'formik'
 
 import { FiPlus, FiMinus } from 'react-icons/fi'
 import { Flex, useTheme, Text } from '@chakra-ui/react'
-import { motion } from 'framer-motion'
 
 import { FormikProps } from 'interfaces-and-types/formik-props.type'
 import { ICharacter } from 'interfaces-and-types/character-sheet.interface'
@@ -24,8 +23,6 @@ type SkillProps = {
   path: string
 }
 
-const MotionSkillTag = motion.custom(SkillTag)
-
 const Skill: React.FC<SkillProps> = ({ skillValue, path, leafKey }) => {
   const formik = useFormikContext<ICharacter>()
   const edit = React.useContext(EditContext)
@@ -38,9 +35,7 @@ const Skill: React.FC<SkillProps> = ({ skillValue, path, leafKey }) => {
   return (
     <Flex align="flex-start" margin=".5rem" direction="column">
       <Flex cursor="pointer" onClick={() => setSkillRoll({ ...dice, skillName: skillNameMap[leafKey] })}>
-        <MotionSkillTag whileHover={{ backgroundColor: 'red' }} colorScheme="cyan">
-          {skillNameMap[leafKey]}
-        </MotionSkillTag>
+        <SkillTag colorScheme="cyan">{skillNameMap[leafKey]}</SkillTag>
         {Array.from({ length: dice.proficiency }).map((_, i) => (
           <SkillBox color={theme.colors.brand.yellow} key={i} />
         ))}

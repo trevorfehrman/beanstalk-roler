@@ -1,5 +1,7 @@
 import * as React from 'react'
 import { FieldInputProps, FormikHelpers, useFormik } from 'formik'
+import { motion } from 'framer-motion'
+// import { motion, useMotionValue, animate, AnimatePresence, motionValue } from 'framer-motion'
 import { firestore } from 'firebase'
 
 import { Button, HStack, Text } from '@chakra-ui/react'
@@ -63,6 +65,7 @@ const DicePanel: React.FC<{
       ...initialDiceValues,
     })
   }
+  const MotionText = motion.custom(Text)
 
   return (
     <div style={{ padding: '1rem', border: '2px solid lightgray', borderRadius: '.375rem', marginTop: '1rem' }}>
@@ -76,7 +79,17 @@ const DicePanel: React.FC<{
         <HStack>
           <Die name="boost" setFieldValue={formik.setFieldValue} value={formik.values.boost}>
             <Boost size="4rem">
-              <Text color="#ececec">{formik.values.boost}</Text>
+              {/* <MotionText
+                initial={{ y: 20, opacity: 0 }}
+                animate={{ y: 0, opacity: 1 }}
+                transition={{
+                  duration: 0.2,
+                }}
+                color="#ececec"
+              >
+                {formik.values.boost}
+              </MotionText> */}
+              <MotionText color="#ececec">{formik.values.boost}</MotionText>
             </Boost>
           </Die>
           <Die name="setback" setFieldValue={formik.setFieldValue} value={formik.values.setback}>

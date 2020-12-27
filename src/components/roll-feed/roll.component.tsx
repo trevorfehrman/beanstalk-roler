@@ -13,8 +13,7 @@ import { ResultDie } from './result-die.component'
 
 const RollContainer = styled('div')(props => ({
   borderTop: '1px solid lightgray',
-  margin: '.5rem',
-  marginTop: '2.5rem',
+  margin: '2.5rem 1rem .5rem .5rem',
   padding: '1rem',
   border: `2px solid ${props.color}`,
   borderRadius: '.375rem',
