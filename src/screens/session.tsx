@@ -13,16 +13,14 @@ import {
   IWeapon,
 } from 'interfaces-and-types/character-sheet.interface'
 
+import { ISkillRoll } from 'interfaces-and-types/roll.interface'
+
 import { CharacterSheetContainer } from 'components/character-sheet/character-sheet-container.component'
 import { RollFeed } from 'components/roll-feed/roll-feed.component'
 
-// eslint-disable-next-line @typescript-eslint/no-explicit-any
 export const SkillContext = React.createContext<
-  [
-    { greenDice: number; yellowDice: number; skillName: string },
-    ({ greenDice, yellowDice, skillName }: { greenDice: number; yellowDice: number; skillName: string }) => void,
-  ]
->([{ greenDice: 0, yellowDice: 0, skillName: '' }, () => null])
+  [ISkillRoll, ({ ability, proficiency, skillName }: ISkillRoll) => void]
+>([{ ability: 0, proficiency: 0, skillName: '' }, () => null])
 
 const Session: React.FC = () => {
   const [character, setCharacter] = React.useState<ICharacter>()
@@ -33,7 +31,7 @@ const Session: React.FC = () => {
     .where('characterDetails.playerId', '==', user.uid)
 
   const userCharacters: ICharacter[] = useFirestoreCollectionData(userCharactersCollectionQuery, { idField: 'docId' })
-  const [skillRoll, setSkillRoll] = React.useState({ greenDice: 0, yellowDice: 0, skillName: '' })
+  const [skillRoll, setSkillRoll] = React.useState({ ability: 0, proficiency: 0, skillName: '' })
 
   const charactersRef = useFirestore().collection('characters')
   function createCharacter() {
@@ -146,7 +144,7 @@ const Session: React.FC = () => {
     <>
       {character ? (
         <>
-          <SkillContext.Provider value={[{ ...skillRoll, skillName: '' }, setSkillRoll]}>
+          <SkillContext.Provider value={[skillRoll, setSkillRoll]}>
             <Flex>
               <CharacterSheetContainer character={character} />
               <RollFeed characterName={character.characterDetails.name} />

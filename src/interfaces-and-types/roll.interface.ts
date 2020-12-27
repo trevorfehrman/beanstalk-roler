@@ -5,6 +5,7 @@ interface IRoll {
   difficulty: string[][]
   proficiency: string[][]
   setback: string[][]
+  skillName?: string
 }
 
 interface IFirebaseRoll {
@@ -13,6 +14,13 @@ interface IFirebaseRoll {
   createdAt: number
   results: IResults
   docId: string
+  skillName: string
+}
+
+interface ISkillRoll {
+  ability: number
+  proficiency: number
+  skillName: string
 }
 
 interface IDicePanel {
@@ -120,4 +128,4 @@ export enum Result {
   Blank = 'blank',
 }
 
-export type { IRoll, IDicePanel, IDieResultMap, IResults, IFirebaseRoll }
+export type { IRoll, IDicePanel, IDieResultMap, IResults, IFirebaseRoll, ISkillRoll }

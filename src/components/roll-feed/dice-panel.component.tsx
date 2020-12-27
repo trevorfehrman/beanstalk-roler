@@ -34,11 +34,17 @@ const DicePanel: React.FC<{
     initialValues: initialDiceValues,
     onSubmit: dicePanelInput => {
       formik.setValues(initialDiceValues)
-      setSkillRoll({ greenDice: 0, yellowDice: 0, skillName: '' })
+      setSkillRoll({ ability: 0, proficiency: 0, skillName: '' })
       const [roll, results] = rollDice(dicePanelInput)
 
       // Firebase will not accept nested arrays, so I'm serializing the object.
-      rollsRef.add({ roll: JSON.stringify(roll), createdAt: Date.now(), characterName, results, skillName: skillRoll })
+      rollsRef.add({
+        roll: JSON.stringify(roll),
+        createdAt: Date.now(),
+        characterName,
+        results,
+        skillName: skillRoll.skillName,
+      })
     },
   })
 
@@ -46,8 +52,8 @@ const DicePanel: React.FC<{
     // TODO: Adding formik to dep array causes infinite loop
     formik.setValues({
       ...formik.values,
-      ability: skillRoll.greenDice,
-      proficiency: skillRoll.yellowDice,
+      ability: skillRoll.ability,
+      proficiency: skillRoll.proficiency,
     })
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [skillRoll])

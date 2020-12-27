@@ -3,6 +3,7 @@ import { Field, useFormikContext } from 'formik'
 
 import { FiPlus, FiMinus } from 'react-icons/fi'
 import { Flex, useTheme, Text } from '@chakra-ui/react'
+import { motion } from 'framer-motion'
 
 import { FormikProps } from 'interfaces-and-types/formik-props.type'
 import { ICharacter } from 'interfaces-and-types/character-sheet.interface'
@@ -23,6 +24,8 @@ type SkillProps = {
   path: string
 }
 
+const MotionSkillTag = motion.custom(SkillTag)
+
 const Skill: React.FC<SkillProps> = ({ skillValue, path, leafKey }) => {
   const formik = useFormikContext<ICharacter>()
   const edit = React.useContext(EditContext)
@@ -35,14 +38,16 @@ const Skill: React.FC<SkillProps> = ({ skillValue, path, leafKey }) => {
   return (
     <Flex align="flex-start" margin=".5rem" direction="column">
       <Flex cursor="pointer" onClick={() => setSkillRoll({ ...dice, skillName: skillNameMap[leafKey] })}>
-        <SkillTag colorScheme="cyan">{skillNameMap[leafKey]}</SkillTag>
-        {Array.from({ length: dice.yellowDice }).map((_, i) => (
+        <MotionSkillTag whileHover={{ backgroundColor: 'red' }} colorScheme="cyan">
+          {skillNameMap[leafKey]}
+        </MotionSkillTag>
+        {Array.from({ length: dice.proficiency }).map((_, i) => (
           <SkillBox color={theme.colors.brand.yellow} key={i} />
         ))}
-        {Array.from({ length: dice.greenDice }).map((_, i) => (
+        {Array.from({ length: dice.ability }).map((_, i) => (
           <SkillBox color={theme.colors.brand.green} key={i} />
         ))}
-        {Array.from({ length: 5 - (dice.yellowDice + dice.greenDice) }).map((_, i) => (
+        {Array.from({ length: 5 - (dice.proficiency + dice.ability) }).map((_, i) => (
           <SkillBox color="white" key={i} />
         ))}
       </Flex>
@@ -51,13 +56,13 @@ const Skill: React.FC<SkillProps> = ({ skillValue, path, leafKey }) => {
           {({ form, field }: FormikProps) => (
             <Flex>
               <SkillButton
-                isDisabled={dice.yellowDice === 0}
+                isDisabled={dice.proficiency === 0}
                 onClick={() => form.setFieldValue(field.name, Number(field.value) - 1)}
               >
                 <FiMinus />
               </SkillButton>
               <SkillButton
-                isDisabled={dice.yellowDice + dice.greenDice === 5}
+                isDisabled={dice.proficiency + dice.ability === 5}
                 onClick={() => form.setFieldValue(field.name, Number(field.value) + 1)}
               >
                 <FiPlus />
