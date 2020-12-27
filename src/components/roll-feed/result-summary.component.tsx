@@ -1,4 +1,5 @@
 import * as React from 'react'
+import { v4 as uuidv4 } from 'uuid'
 
 import { IResults, Result } from 'interfaces-and-types/roll.interface'
 
@@ -26,7 +27,7 @@ const ResultSummary: React.FC<{ results: IResults }> = ({ results }) => {
         if (resultKey === Result.Blank) return
         if (result)
           return (
-            <span style={{ marginRight: '.5rem' }}>
+            <span key={uuidv4()} style={{ marginRight: '.5rem' }}>
               <span>{resultKey.charAt(0).toUpperCase() + resultKey.slice(1)}: </span>
               <span>{result}</span>
             </span>

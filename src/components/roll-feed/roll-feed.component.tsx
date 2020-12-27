@@ -36,6 +36,7 @@ const RollFeed: React.FC<{ characterName: string }> = ({ characterName }) => {
             <Roll
               key={firebaseRoll.docId}
               roll={roll}
+              skillName={firebaseRoll.skillName}
               characterName={firebaseRoll.characterName}
               results={firebaseRoll.results}
             />

@@ -1,4 +1,4 @@
 export type Dice = {
-  greenDice: number
-  yellowDice: number
+  ability: number
+  proficiency: number
 }

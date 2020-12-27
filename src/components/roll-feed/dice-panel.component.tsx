@@ -2,13 +2,13 @@ import * as React from 'react'
 import { FieldInputProps, FormikHelpers, useFormik } from 'formik'
 import { firestore } from 'firebase'
 
-import { Button, HStack, Text, Tooltip } from '@chakra-ui/react'
+import { Button, HStack, Text } from '@chakra-ui/react'
 
 import { IRoll } from 'interfaces-and-types/roll.interface'
 import { initialDiceValues } from 'constants/dice-panel-initial-values.constant'
 import { rollDice } from 'utils/roll-dice'
 
-import { DiceContext } from 'screens/session'
+import { SkillContext } from 'screens/session'
 
 import { Boost } from 'assets/boost'
 import { Setback } from 'assets/setback'
@@ -28,17 +28,23 @@ const DicePanel: React.FC<{
   rollsRef: firestore.CollectionReference
   characterName: string
 }> = ({ rollsRef, characterName }) => {
-  const [dice, setDice] = React.useContext(DiceContext)
+  const [skillRoll, setSkillRoll] = React.useContext(SkillContext)
 
   const formik = useFormik({
     initialValues: initialDiceValues,
     onSubmit: dicePanelInput => {
       formik.setValues(initialDiceValues)
-      setDice({ greenDice: 0, yellowDice: 0 })
+      setSkillRoll({ ability: 0, proficiency: 0, skillName: '' })
       const [roll, results] = rollDice(dicePanelInput)
 
       // Firebase will not accept nested arrays, so I'm serializing the object.
-      rollsRef.add({ roll: JSON.stringify(roll), createdAt: Date.now(), characterName, results })
+      rollsRef.add({
+        roll: JSON.stringify(roll),
+        createdAt: Date.now(),
+        characterName,
+        results,
+        skillName: skillRoll.skillName,
+      })
     },
   })
 
@@ -46,11 +52,11 @@ const DicePanel: React.FC<{
     // TODO: Adding formik to dep array causes infinite loop
     formik.setValues({
       ...formik.values,
-      ability: dice.greenDice,
-      proficiency: dice.yellowDice,
+      ability: skillRoll.ability,
+      proficiency: skillRoll.proficiency,
     })
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [dice])
+  }, [skillRoll])
 
   function clearValues() {
     formik.setValues({
