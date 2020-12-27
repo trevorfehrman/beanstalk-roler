@@ -17,7 +17,12 @@ import { CharacterSheetContainer } from 'components/character-sheet/character-sh
 import { RollFeed } from 'components/roll-feed/roll-feed.component'
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
-export const DiceContext = React.createContext<any>(null)
+export const SkillContext = React.createContext<
+  [
+    { greenDice: number; yellowDice: number; skillName: string },
+    ({ greenDice, yellowDice, skillName }: { greenDice: number; yellowDice: number; skillName: string }) => void,
+  ]
+>([{ greenDice: 0, yellowDice: 0, skillName: '' }, () => null])
 
 const Session: React.FC = () => {
   const [character, setCharacter] = React.useState<ICharacter>()
@@ -28,7 +33,7 @@ const Session: React.FC = () => {
     .where('characterDetails.playerId', '==', user.uid)
 
   const userCharacters: ICharacter[] = useFirestoreCollectionData(userCharactersCollectionQuery, { idField: 'docId' })
-  const [dice, setDice] = React.useState({ greenDice: 0, yellowDice: 0 })
+  const [skillRoll, setSkillRoll] = React.useState({ greenDice: 0, yellowDice: 0, skillName: '' })
 
   const charactersRef = useFirestore().collection('characters')
   function createCharacter() {
@@ -141,12 +146,12 @@ const Session: React.FC = () => {
     <>
       {character ? (
         <>
-          <DiceContext.Provider value={[dice, setDice]}>
+          <SkillContext.Provider value={[{ ...skillRoll, skillName: '' }, setSkillRoll]}>
             <Flex>
               <CharacterSheetContainer character={character} />
               <RollFeed characterName={character.characterDetails.name} />
             </Flex>
-          </DiceContext.Provider>
+          </SkillContext.Provider>
         </>
       ) : (
         <Center height="100vh">
